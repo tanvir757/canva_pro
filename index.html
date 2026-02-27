@@ -16,7 +16,8 @@
         .premium-spinner::before { content: ''; position: absolute; inset: 4px; background-color: #0B1120; border-radius: 50%; }
         @keyframes spin { to { transform: rotate(360deg); } }
         
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: #0B1120; }
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 10px; }
         
@@ -26,7 +27,7 @@
         .form-label { font-size: 0.85rem; color: #cbd5e1; margin-bottom: 6px; display: block; font-weight: 500; }
         .pay-btn { background-color: transparent; border: 1px solid #374151; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; }
         
-        /* Editable Mode Styles (For Pencil Icon) */
+        /* Editable Mode Styles */
         body.edit-mode .editable-text { position: relative; border: 1px dashed rgba(125,42,232,0.8); border-radius: 6px; padding: 4px; cursor: pointer; transition: all 0.2s; display: inline-block; background: rgba(125,42,232,0.1); }
         body.edit-mode .editable-text:hover { background: rgba(125, 42, 232, 0.25); border-color: #00C4CC; }
         body.edit-mode .editable-text::after { content: '✏️'; position: absolute; top: -12px; right: -12px; font-size: 14px; background: #111827; border: 2px solid #7D2AE8; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 5px rgba(0,0,0,0.5);}
@@ -38,10 +39,10 @@
         
         <div id="editModeBanner" class="hidden sticky top-0 z-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 flex justify-between items-center shadow-lg">
             <div class="flex items-center gap-2 font-bold text-sm sm:text-base">
-                <span class="animate-pulse">🔴</span> লাইভ এডিট মোড চালু আছে
+                <span class="animate-pulse">🔴</span> লাইভ এডিট মোড
             </div>
             <p class="text-xs hidden sm:block">যে লেখাটি পরিবর্তন করতে চান, তার ওপর (✏️) ক্লিক করুন</p>
-            <button onclick="exitEditMode()" class="bg-white text-blue-600 hover:bg-slate-200 px-4 py-1.5 rounded-lg text-sm font-bold transition-colors shadow-md">সেভ করে ফিরে যান</button>
+            <button onclick="exitEditMode()" class="bg-white text-blue-600 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-sm font-bold shadow-md">ফিরে যান</button>
         </div>
 
         <section class="pt-10 pb-10 sm:pt-16 sm:pb-12 flex flex-col justify-center items-center px-4 relative">
@@ -142,7 +143,7 @@
             <div class="h-20 flex items-center justify-center border-b border-slate-800"><h1 class="text-xl font-bold text-white tracking-wider">Control Panel</h1></div>
             <nav class="flex-1 px-4 py-6 space-y-2">
                 <button class="w-full flex items-center px-4 py-3.5 bg-blue-600/20 text-blue-400 rounded-xl font-semibold border border-blue-500/30 transition-all">📊 অর্ডার লিস্ট</button>
-                <button onclick="enterEditMode()" class="w-full flex items-center px-4 py-3.5 text-slate-400 hover:bg-slate-800 rounded-xl font-medium transition-all">✏️ লাইভ এডিট করুন</button>
+                <button onclick="enterEditMode()" class="w-full flex items-center px-4 py-3.5 text-slate-400 hover:bg-slate-800 rounded-xl font-medium transition-all border border-transparent">✏️ লাইভ এডিট করুন</button>
             </nav>
             <div class="p-6 border-t border-slate-800"><button onclick="handleLogout()" class="w-full bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white py-3 rounded-xl font-bold transition-all">লগআউট</button></div>
         </aside>
@@ -153,45 +154,43 @@
                 <button onclick="handleLogout()" class="md:hidden bg-red-500/10 text-red-400 px-3 py-1.5 rounded-lg text-xs font-bold border border-red-500/20">Logout</button>
             </header>
 
-            <div class="flex-1 overflow-y-auto p-3 sm:p-6 bg-[#0B1120]">
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
-                    <div class="bg-[#1f2937] p-4 rounded-2xl border border-slate-700 shadow-lg">
-                        <p class="text-slate-400 text-[11px] sm:text-sm font-semibold mb-1">মোট অর্ডার</p>
-                        <h3 id="statTotalCount" class="text-xl sm:text-3xl font-bold text-white">0</h3>
-                        <p class="text-[10px] sm:text-xs font-bold text-blue-400 mt-1">৳ <span id="statTotalAmount">0</span></p>
+            <div class="flex-1 overflow-y-auto p-2 sm:p-6 bg-[#0B1120]">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-6">
+                    <div class="bg-[#1f2937] p-3 sm:p-5 rounded-2xl border border-slate-700 shadow-lg">
+                        <p class="text-slate-400 text-[10px] sm:text-sm font-semibold mb-1">মোট অর্ডার</p>
+                        <h3 id="statTotalCount" class="text-lg sm:text-3xl font-bold text-white">0</h3>
+                        <p class="text-[9px] sm:text-xs font-bold text-blue-400 mt-1">৳ <span id="statTotalAmount">0</span></p>
                     </div>
-                    <div class="bg-[#1f2937] p-4 rounded-2xl border border-slate-700 shadow-lg">
-                        <p class="text-slate-400 text-[11px] sm:text-sm font-semibold mb-1">কনফার্মড (সম্পন্ন)</p>
-                        <h3 id="statConfirmedCount" class="text-xl sm:text-3xl font-bold text-green-400">0</h3>
-                        <p class="text-[10px] sm:text-xs font-bold text-green-400 mt-1">৳ <span id="statConfirmedAmount">0</span></p>
+                    <div class="bg-[#1f2937] p-3 sm:p-5 rounded-2xl border border-slate-700 shadow-lg">
+                        <p class="text-slate-400 text-[10px] sm:text-sm font-semibold mb-1">কনফার্মড</p>
+                        <h3 id="statConfirmedCount" class="text-lg sm:text-3xl font-bold text-green-400">0</h3>
+                        <p class="text-[9px] sm:text-xs font-bold text-green-400 mt-1">৳ <span id="statConfirmedAmount">0</span></p>
                     </div>
-                    <div class="bg-[#1f2937] p-4 rounded-2xl border border-slate-700 shadow-lg">
-                        <p class="text-slate-400 text-[11px] sm:text-sm font-semibold mb-1">পেন্ডিং (অপেক্ষমান)</p>
-                        <h3 id="statPendingCount" class="text-xl sm:text-3xl font-bold text-yellow-400">0</h3>
-                        <p class="text-[10px] sm:text-xs font-bold text-yellow-400 mt-1">৳ <span id="statPendingAmount">0</span></p>
+                    <div class="bg-[#1f2937] p-3 sm:p-5 rounded-2xl border border-slate-700 shadow-lg">
+                        <p class="text-slate-400 text-[10px] sm:text-sm font-semibold mb-1">পেন্ডিং</p>
+                        <h3 id="statPendingCount" class="text-lg sm:text-3xl font-bold text-yellow-400">0</h3>
+                        <p class="text-[9px] sm:text-xs font-bold text-yellow-400 mt-1">৳ <span id="statPendingAmount">0</span></p>
                     </div>
-                    <div class="bg-[#1f2937] p-4 rounded-2xl border border-slate-700 shadow-lg">
-                        <p class="text-slate-400 text-[11px] sm:text-sm font-semibold mb-1">রিজেক্টেড (বাতিল)</p>
-                        <h3 id="statRejectedCount" class="text-xl sm:text-3xl font-bold text-red-400">0</h3>
-                        <p class="text-[10px] sm:text-xs font-bold text-red-400 mt-1">৳ <span id="statRejectedAmount">0</span></p>
+                    <div class="bg-[#1f2937] p-3 sm:p-5 rounded-2xl border border-slate-700 shadow-lg">
+                        <p class="text-slate-400 text-[10px] sm:text-sm font-semibold mb-1">রিজেক্টেড</p>
+                        <h3 id="statRejectedCount" class="text-lg sm:text-3xl font-bold text-red-400">0</h3>
+                        <p class="text-[9px] sm:text-xs font-bold text-red-400 mt-1">৳ <span id="statRejectedAmount">0</span></p>
                     </div>
                 </div>
 
-                <div class="bg-[#1f2937] rounded-2xl border border-slate-700 overflow-hidden shadow-xl">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left table-fixed min-w-[550px]">
-                            <thead class="bg-[#111827] text-slate-400 text-[11px] sm:text-xs border-b border-slate-700">
-                                <tr>
-                                    <th class="w-[30%] px-4 py-3 sm:py-4 truncate">কাস্টমার তথ্য (ক্লিক করুন)</th>
-                                    <th class="w-[20%] px-2 py-3 sm:py-4">পেমেন্ট</th>
-                                    <th class="w-[20%] px-2 py-3 sm:py-4">স্ট্যাটাস/TrxID</th>
-                                    <th class="w-[30%] px-4 py-3 sm:py-4 text-right">অ্যাকশন (সরাসরি কনফার্ম)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ordersTableBody" class="divide-y divide-slate-800 text-xs sm:text-sm">
-                                </tbody>
-                        </table>
-                    </div>
+                <div class="bg-[#1f2937] rounded-2xl border border-slate-700 overflow-hidden shadow-xl w-full">
+                    <table class="w-full text-left">
+                        <thead class="bg-[#111827] text-slate-400 text-[9px] sm:text-xs border-b border-slate-700">
+                            <tr>
+                                <th class="px-2 py-3 sm:px-4 sm:py-4">কাস্টমার (ক্লিক)</th>
+                                <th class="px-1 py-3 sm:px-4 sm:py-4 text-center">পেমেন্ট</th>
+                                <th class="px-1 py-3 sm:px-4 sm:py-4 text-center">স্ট্যাটাস / TrxID</th>
+                                <th class="px-2 py-3 sm:px-4 sm:py-4 text-right">অ্যাকশন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody" class="divide-y divide-slate-800 text-[10px] sm:text-sm">
+                            </tbody>
+                    </table>
                 </div>
             </div>
         </main>
@@ -207,10 +206,7 @@
     </div>
 
     <div id="processingOverlay" class="fixed inset-0 z-[300] hidden items-center justify-center bg-[#0B1120]/90 backdrop-blur-sm opacity-0 transition-opacity duration-300">
-        <div class="flex flex-col items-center">
-            <div class="premium-spinner mb-6"></div>
-            <h3 id="processText" class="text-xl font-bold text-white tracking-wide">প্রসেসিং হচ্ছে...</h3>
-        </div>
+        <div class="flex flex-col items-center"><div class="premium-spinner mb-6"></div><h3 id="processText" class="text-xl font-bold text-white tracking-wide">প্রসেসিং হচ্ছে...</h3></div>
     </div>
 
     <div id="customAlertModal" class="fixed inset-0 z-[310] hidden items-center justify-center px-4">
@@ -229,7 +225,7 @@
             <h3 id="confirmTitle" class="mb-2 text-xl font-bold text-white">নিশ্চিত করুন</h3>
             <p id="confirmMessage" class="mb-8 text-sm text-slate-300">আপনি কি এই কাজটি করতে চান?</p>
             <div class="flex gap-3">
-                <button onclick="closeCustomConfirm()" class="flex-1 bg-slate-800 hover:bg-slate-700 py-3.5 rounded-xl font-bold text-white transition-colors border border-slate-600 text-sm">বাতিল</button>
+                <button onclick="closeCustomConfirm()" class="flex-1 bg-slate-800 hover:bg-slate-700 py-3.5 rounded-xl font-bold text-white transition-colors border border-slate-600 text-sm">না, বাতিল</button>
                 <button id="confirmActionBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 py-3.5 rounded-xl font-bold text-white transition-colors text-sm">হ্যাঁ, করুন</button>
             </div>
         </div>
@@ -274,7 +270,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, doc, updateDoc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, doc, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         const firebaseConfig = {
@@ -290,7 +286,6 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Core UI Functions
         window.showProcessing = function(text = "প্রসেসিং হচ্ছে...") {
             document.getElementById('processText').innerText = text;
             const overlay = document.getElementById('processingOverlay');
@@ -300,11 +295,7 @@
         window.hideProcessing = function(callback) {
             const overlay = document.getElementById('processingOverlay');
             overlay.classList.add('opacity-0');
-            setTimeout(() => { 
-                overlay.classList.add('hidden'); 
-                overlay.classList.remove('flex'); 
-                if(callback) callback();
-            }, 300);
+            setTimeout(() => { overlay.classList.add('hidden'); overlay.classList.remove('flex'); if(callback) callback(); }, 300);
         }
 
         // ================= AUTHENTICATION =================
@@ -328,9 +319,7 @@
             setTimeout(() => {
                 signInWithEmailAndPassword(auth, document.getElementById('adminEmail').value, document.getElementById('adminPass').value)
                 .then(() => { window.hideProcessing(); })
-                .catch(err => { 
-                    window.hideProcessing(() => { window.showCustomAlert("লগইন ব্যর্থ!", "ইমেইল অথবা পাসওয়ার্ড ভুল হয়েছে।", false); });
-                });
+                .catch(err => { window.hideProcessing(() => { window.showCustomAlert("লগইন ব্যর্থ!", "ইমেইল অথবা পাসওয়ার্ড ভুল হয়েছে।", false); }); });
             }, 1200);
         });
 
@@ -338,10 +327,7 @@
             window.showProcessing("লগআউট করা হচ্ছে...");
             setTimeout(() => {
                 signOut(auth).then(() => {
-                    window.hideProcessing(() => {
-                        exitEditMode();
-                        window.scrollTo(0,0);
-                    });
+                    window.hideProcessing(() => { exitEditMode(); window.scrollTo(0,0); });
                 });
             }, 1000);
         }
@@ -356,7 +342,6 @@
                 if(data.hero_title) document.getElementById('display_title').innerHTML = data.hero_title;
                 if(data.hero_desc) document.getElementById('display_desc').innerHTML = data.hero_desc;
                 if(data.feature_title) document.getElementById('display_feature_title').innerHTML = data.feature_title;
-                
                 if(data.price) {
                     document.getElementById('display_price').innerText = `${data.price}`;
                     document.querySelectorAll('.paymentAmount').forEach(el => el.innerText = data.price);
@@ -398,19 +383,16 @@
                         window.selectedMethod = '';
                     });
                 }, 1500);
-            } catch(error) {
-                window.hideProcessing(() => { window.showCustomAlert("দুঃখিত!", "সমস্যা হয়েছে। আবার চেষ্টা করুন।", false); });
-            }
+            } catch(error) { window.hideProcessing(() => { window.showCustomAlert("দুঃখিত!", "সমস্যা হয়েছে। আবার চেষ্টা করুন।", false); }); }
         });
 
-        // ================= ADMIN DATA (4 COLUMNS - ACTION IN TABLE) =================
+        // ================= ADMIN DATA (PERFECT RESPONSIVE TABLE) =================
         window.globalOrders = {}; 
         
         function loadAdminData() {
             onSnapshot(query(collection(db, "orders"), orderBy("timestamp", "desc")), (snapshot) => {
                 const tbody = document.getElementById('ordersTableBody');
                 tbody.innerHTML = '';
-                
                 let stats = { total: { c: 0, a: 0 }, pending: { c: 0, a: 0 }, confirmed: { c: 0, a: 0 }, rejected: { c: 0, a: 0 } };
 
                 if(snapshot.empty) {
@@ -418,9 +400,9 @@
                     updateStatsDOM(stats); return;
                 }
 
-                snapshot.forEach((doc) => {
-                    const order = doc.data();
-                    const id = doc.id;
+                snapshot.forEach((docSnap) => {
+                    const order = docSnap.data();
+                    const id = docSnap.id;
                     window.globalOrders[id] = order;
                     const amt = Number(order.amount) || 0;
                     
@@ -429,41 +411,44 @@
                     else if (order.status === 'Confirmed') { stats.confirmed.c++; stats.confirmed.a += amt; }
                     else if (order.status === 'Rejected') { stats.rejected.c++; stats.rejected.a += amt; }
 
-                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded text-[10px] font-bold">⏳ Pending</span>`;
-                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-2 py-0.5 rounded text-[10px] font-bold">✅ Confirm</span>`;
-                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-2 py-0.5 rounded text-[10px] font-bold">❌ Reject</span>`;
+                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold">Pending</span>`;
+                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold">Confirm</span>`;
+                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold">Reject</span>`;
 
                     const payColor = order.paymentMethod.includes('bKash') ? 'text-[#E2136E]' : 'text-[#F58220]';
 
-                    // Direct Action Buttons in Table
+                    // NO DELETE BUTTON. ONLY CONFIRM AND REJECT!
                     let actionBtns = '';
                     if(order.status === 'Pending') {
                         actionBtns = `
-                            <div class="flex gap-1.5 justify-end">
-                                <button onclick="event.stopPropagation(); handleQuickAction('Confirmed', '${id}')" class="bg-green-600/20 text-green-400 hover:bg-green-600 hover:text-white px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-all border border-green-500/30">✅ কনফার্ম</button>
-                                <button onclick="event.stopPropagation(); handleQuickAction('Rejected', '${id}')" class="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-all border border-red-500/30">❌ রিজেক্ট</button>
+                            <div class="flex gap-1 justify-end">
+                                <button onclick="event.stopPropagation(); handleQuickAction('Confirmed', '${id}')" class="bg-green-600/20 text-green-400 hover:bg-green-600 hover:text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded flex items-center justify-center transition-all border border-green-500/30" title="কনফার্ম">
+                                    ✅ <span class="hidden sm:inline ml-1 text-[11px]">কনফার্ম</span>
+                                </button>
+                                <button onclick="event.stopPropagation(); handleQuickAction('Rejected', '${id}')" class="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded flex items-center justify-center transition-all border border-red-500/30" title="রিজেক্ট">
+                                    ❌ <span class="hidden sm:inline ml-1 text-[11px]">রিজেক্ট</span>
+                                </button>
                             </div>
                         `;
                     } else {
-                        actionBtns = `
-                            <button onclick="event.stopPropagation(); handleQuickAction('Delete', '${id}')" class="w-full sm:w-auto bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-all border border-slate-600">🗑️ ডিলিট</button>
-                        `;
+                        // If already processed, just show text, NO buttons to save space.
+                        actionBtns = `<span class="text-[10px] sm:text-xs text-slate-500 font-bold mr-2">সম্পন্ন</span>`;
                     }
 
                     const tr = `
-                        <tr class="hover:bg-[#2d3748] transition-colors cursor-pointer group border-t border-slate-800" onclick="viewCustomerDetails('${id}')">
-                            <td class="w-[30%] px-4 py-3 sm:py-4 truncate border-r border-slate-800/50">
-                                <p class="text-white font-semibold truncate group-hover:text-blue-400 transition-colors">${order.name}</p>
-                                <p class="text-[10px] sm:text-[11px] text-slate-400 truncate">${order.email}</p>
+                        <tr class="hover:bg-[#2d3748] transition-colors cursor-pointer border-t border-slate-800" onclick="viewCustomerDetails('${id}')">
+                            <td class="px-2 py-3 sm:px-4 sm:py-4 border-r border-slate-800/50">
+                                <p class="text-white font-semibold text-[11px] sm:text-sm truncate w-24 sm:w-auto">${order.name}</p>
+                                <p class="text-[9px] sm:text-xs text-slate-400 truncate">${order.phone}</p>
                             </td>
-                            <td class="w-[20%] px-2 py-3 sm:py-4 font-bold ${payColor} border-r border-slate-800/50 text-center sm:text-left">
+                            <td class="px-1 py-3 sm:px-4 sm:py-4 font-bold text-[10px] sm:text-sm ${payColor} border-r border-slate-800/50 text-center">
                                 ${order.paymentMethod.replace(' (Merchant)', '')}
                             </td>
-                            <td class="w-[20%] px-2 py-3 sm:py-4 border-r border-slate-800/50">
-                                <p class="font-mono text-[10px] sm:text-xs text-slate-300 mb-1 truncate">${order.trxId}</p>
+                            <td class="px-1 py-3 sm:px-4 sm:py-4 border-r border-slate-800/50 text-center">
+                                <p class="font-mono text-[9px] sm:text-xs text-slate-300 mb-1 truncate w-16 sm:w-auto mx-auto">${order.trxId}</p>
                                 ${sBadge}
                             </td>
-                            <td class="w-[30%] px-4 py-3 sm:py-4 text-right">
+                            <td class="px-2 py-3 sm:px-4 sm:py-4 text-right">
                                 ${actionBtns}
                             </td>
                         </tr>
@@ -483,16 +468,6 @@
 
         // ================= QUICK ACTION LOGIC =================
         window.handleQuickAction = async function(action, id, isFromModal = false) {
-            if(action === 'Delete') {
-                if(isFromModal) window.closeDetailsModal();
-                window.showCustomConfirm("সতর্কতা!", "সত্যিই কি ডিলিট করতে চান?", async () => {
-                    window.showProcessing("ডিলিট হচ্ছে...");
-                    await deleteDoc(doc(db, "orders", id));
-                    window.hideProcessing(() => window.showCustomAlert("সফল!", "ডিলিট করা হয়েছে।"));
-                });
-                return;
-            }
-
             if(action === 'Update') {
                 window.showProcessing("তথ্য আপডেট হচ্ছে...");
                 setTimeout(async () => {
@@ -513,7 +488,7 @@
                 return;
             }
 
-            // Confirm or Reject
+            // Confirm or Reject Only
             window.showProcessing("স্ট্যাটাস আপডেট হচ্ছে...");
             setTimeout(async () => {
                 try {
@@ -540,7 +515,6 @@
     </script>
 
     <script>
-        // Form & Select Logic
         window.selectedMethod = '';
         function selectPayment(method) {
             window.selectedMethod = method;
@@ -566,7 +540,6 @@
         function scrollToForm() { document.getElementById('orderSection').scrollIntoView({ behavior: 'smooth' }); }
         function copyNagadNumber() { navigator.clipboard.writeText(document.getElementById('nagadNumber').innerText); window.showCustomAlert("কপি হয়েছে!", "নগদ নাম্বারটি কপি করা হয়েছে।"); }
 
-        // Password Toggle
         window.togglePassword = function() {
             const passInput = document.getElementById('adminPass');
             const eyeIcon = document.getElementById('eyeIcon');
@@ -574,7 +547,6 @@
             else { passInput.type = 'password'; eyeIcon.innerText = '👁️'; }
         }
 
-        // Custom Modals
         window.showCustomAlert = function(title, message, isSuccess=true) {
             document.getElementById('customAlertTitle').innerText = title;
             document.getElementById('customAlertMessage').innerHTML = message;
@@ -607,7 +579,7 @@
             if(confirmActionCallback) confirmActionCallback();
         });
 
-        // Details Modal with Logic
+        // Details Modal
         window.viewCustomerDetails = function(id) {
             window.showProcessing("লোড হচ্ছে...");
             setTimeout(() => {
@@ -638,7 +610,7 @@
             setTimeout(() => document.getElementById('customerDetailsModal').classList.add('hidden'), 300);
         }
 
-        // ================= LIVE EDIT MODE (PENCIL ICON) =================
+        // ================= LIVE EDIT MODE =================
         let currentEditKey = '';
         
         window.enterEditMode = function() {
@@ -656,7 +628,6 @@
             document.getElementById('adminDashboardView').classList.remove('hidden');
         }
 
-        // Attach click event to all editable texts
         document.querySelectorAll('.editable-text').forEach(el => {
             el.addEventListener('click', function(e) {
                 if(!document.body.classList.contains('edit-mode')) return;
