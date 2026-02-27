@@ -137,7 +137,6 @@
     </div>
 
     <div id="adminDashboardView" class="hidden h-screen flex bg-[#0B1120] relative z-30">
-        
         <aside class="w-64 bg-[#111827] border-r border-slate-800 flex-col hidden md:flex">
             <div class="h-20 flex items-center justify-center border-b border-slate-800"><h1 class="text-xl font-bold text-white tracking-wider">Control Panel</h1></div>
             <nav class="flex-1 px-4 py-6 space-y-2">
@@ -181,9 +180,9 @@
                     <table class="w-full text-left table-fixed">
                         <thead class="bg-[#111827] text-slate-400 text-[10px] sm:text-xs border-b border-slate-700">
                             <tr>
-                                <th class="w-[40%] px-2 py-3 sm:px-4 sm:py-4 pl-3">কাস্টমার</th>
-                                <th class="w-[32%] px-1 py-3 sm:px-4 sm:py-4 text-center">TrxID/স্ট্যাটাস</th>
-                                <th class="w-[28%] px-2 py-3 sm:px-4 sm:py-4 text-right pr-3">অ্যাকশন</th>
+                                <th class="w-[42%] px-3 py-3 sm:px-4 sm:py-4 pl-3 sm:pl-4">কাস্টমার (ক্লিক করুন)</th>
+                                <th class="w-[28%] px-1 py-3 sm:px-4 sm:py-4 text-center">স্ট্যাটাস / TrxID</th>
+                                <th class="w-[30%] px-2 py-3 sm:px-4 sm:py-4 text-right pr-3 sm:pr-4">অ্যাকশন</th>
                             </tr>
                         </thead>
                         <tbody id="ordersTableBody" class="divide-y divide-slate-800 text-[11px] sm:text-sm">
@@ -217,6 +216,18 @@
         </div>
     </div>
 
+    <div id="customConfirmModal" class="fixed inset-0 z-[310] hidden items-center justify-center px-4">
+        <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" onclick="closeCustomConfirm()"></div>
+        <div id="customConfirmBox" class="relative z-10 w-full max-w-sm transform rounded-3xl bg-[#1f2937] p-8 text-center border border-slate-700 shadow-2xl scale-95 opacity-0 transition-all duration-300">
+            <h3 id="confirmTitle" class="mb-2 text-xl font-bold text-white">নিশ্চিত করুন</h3>
+            <p id="confirmMessage" class="mb-8 text-sm text-slate-300">আপনি কি এই কাজটি করতে চান?</p>
+            <div class="flex gap-3">
+                <button onclick="closeCustomConfirm()" class="flex-1 bg-slate-800 hover:bg-slate-700 py-3.5 rounded-xl font-bold text-white transition-colors border border-slate-600 text-sm">না, বাতিল</button>
+                <button id="confirmActionBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 py-3.5 rounded-xl font-bold text-white transition-colors text-sm">হ্যাঁ, করুন</button>
+            </div>
+        </div>
+    </div>
+
     <div id="customerDetailsModal" class="fixed inset-0 z-[250] hidden items-center justify-center px-4">
         <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" onclick="closeDetailsModal()"></div>
         <div id="detailsBox" class="relative z-10 w-full max-w-md transform rounded-3xl bg-[#1f2937] border border-slate-700 shadow-2xl scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[90vh]">
@@ -237,10 +248,7 @@
                     <div><p class="text-xs text-slate-400 mb-1">বর্তমান স্ট্যাটাস</p><div id="detStatus"></div></div>
                 </div>
                 <div><label class="text-xs text-slate-400 mb-1 block">TrxID</label><input type="text" id="detTrxId" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-3 py-2 text-[#F58220] font-mono tracking-wider font-bold outline-none focus:border-blue-500"></div>
-                
                 <button onclick="handleQuickAction('Update', document.getElementById('modalOrderId').value, true)" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold py-3 rounded-xl transition-colors text-sm mt-2">💾 তথ্যগুলো সেভ করুন</button>
-                
-                <button id="modalDeleteBtn" onclick="handleQuickAction('Delete', document.getElementById('modalOrderId').value, true)" class="hidden w-full bg-red-500/10 hover:bg-red-600 border border-red-500/30 text-red-400 hover:text-white font-bold py-3 rounded-xl transition-colors text-sm mt-2">🗑️ রেকর্ড ডিলিট করুন</button>
             </div>
         </div>
     </div>
@@ -287,7 +295,6 @@
             setTimeout(() => { overlay.classList.add('hidden'); overlay.classList.remove('flex'); if(callback) callback(); }, 300);
         }
 
-        // ================= AUTHENTICATION =================
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 document.getElementById('adminLoginView').classList.add('hidden');
@@ -321,7 +328,6 @@
             }, 1000);
         }
 
-        // ================= PUBLIC SETTINGS LOAD =================
         window.currentSettings = {};
         onSnapshot(doc(db, "settings", "site_info"), (docSnap) => {
             if (docSnap.exists()) {
@@ -343,7 +349,6 @@
             }
         });
 
-        // ================= PUBLIC FORM SUBMIT =================
         document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             window.showProcessing("অর্ডারটি সার্ভারে সেভ হচ্ছে...");
@@ -375,7 +380,7 @@
             } catch(error) { window.hideProcessing(() => { window.showCustomAlert("দুঃখিত!", "সমস্যা হয়েছে। আবার চেষ্টা করুন।", false); }); }
         });
 
-        // ================= ADMIN DATA =================
+        // ================= ADMIN DATA WITH SVG ICONS =================
         window.globalOrders = {}; 
         
         function loadAdminData() {
@@ -402,38 +407,44 @@
                     else if (order.status === 'Confirmed') { stats.confirmed.c++; stats.confirmed.a += amt; }
                     else if (order.status === 'Rejected') { stats.rejected.c++; stats.rejected.a += amt; }
 
-                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-bold mt-1 inline-block">⏳ Pending</span>`;
-                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-bold mt-1 inline-block">✅ Confirmed</span>`;
-                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-bold mt-1 inline-block">❌ Rejected</span>`;
+                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-bold mt-1 inline-block">⏳ Pending</span>`;
+                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-bold mt-1 inline-block">✅ Confirmed</span>`;
+                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-bold mt-1 inline-block">❌ Rejected</span>`;
 
                     const payColor = order.paymentMethod.includes('bKash') ? 'text-[#E2136E]' : 'text-[#F58220]';
 
-                    // ACTION BUTTONS EXACTLY LIKE YOUR PREVIOUS SCREENSHOT
+                    // High visibility action buttons matching screenshot
                     let actionBtns = '';
                     if(isPending) {
                         actionBtns = `
-                            <div class="flex gap-1.5 justify-end">
-                                <button onclick="event.stopPropagation(); handleQuickAction('Confirmed', '${id}')" class="bg-green-600 hover:bg-green-700 text-white w-7 h-7 sm:w-9 sm:h-9 flex items-center justify-center rounded-md border border-green-500/30 transition-all text-[11px] sm:text-sm">✅</button>
-                                <button onclick="event.stopPropagation(); handleQuickAction('Rejected', '${id}')" class="bg-red-600 hover:bg-red-700 text-white w-7 h-7 sm:w-9 sm:h-9 flex items-center justify-center rounded-md border border-red-500/30 transition-all text-[11px] sm:text-sm">❌</button>
+                            <div class="flex gap-2 justify-end pr-1 sm:pr-2">
+                                <button onclick="event.stopPropagation(); handleQuickAction('Confirmed', '${id}')" class="bg-green-600 hover:bg-green-500 text-white w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded shadow-md transition-all">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                </button>
+                                <button onclick="event.stopPropagation(); handleQuickAction('Rejected', '${id}')" class="bg-red-600 hover:bg-red-500 text-white w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded shadow-md transition-all">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </button>
                             </div>
                         `;
                     } else {
-                        let stText = order.status === 'Confirmed' ? '<span class="text-green-500 font-bold text-[9px] sm:text-xs">✅ কনফার্মড</span>' : '<span class="text-red-500 font-bold text-[9px] sm:text-xs">❌ রিজেক্টেড</span>';
+                        let stText = order.status === 'Confirmed' ? 
+                            '<span class="text-green-500 font-bold text-[11px] sm:text-xs flex items-center justify-end gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg> কনফার্মড</span>' : 
+                            '<span class="text-red-500 font-bold text-[11px] sm:text-xs flex items-center justify-end gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg> রিজেক্টেড</span>';
                         actionBtns = stText;
                     }
 
                     const tr = `
                         <tr class="hover:bg-[#2d3748] transition-colors cursor-pointer group border-t border-slate-800" onclick="viewCustomerDetails('${id}')">
-                            <td class="px-2 py-3 sm:px-4 sm:py-4 pl-3 sm:pl-4 border-r border-slate-800/50">
-                                <p class="text-white font-semibold text-[11px] sm:text-sm truncate max-w-[100px] sm:max-w-[180px]">${order.name}</p>
-                                <p class="text-[9px] sm:text-xs text-slate-400 mt-0.5 truncate max-w-[100px] sm:max-w-[180px]">${order.phone}</p>
-                                <p class="font-bold text-[9px] sm:text-xs ${payColor} mt-0.5">${order.paymentMethod.replace(' (Merchant)', '')}</p>
+                            <td class="w-[42%] px-3 py-4 sm:px-6 border-r border-slate-800/50">
+                                <p class="text-white font-semibold text-xs sm:text-sm truncate max-w-[120px] sm:max-w-[180px] group-hover:text-blue-400 transition-colors">${order.name}</p>
+                                <p class="text-[9px] sm:text-[11px] text-slate-400 mt-1 truncate">${order.phone}</p>
+                                <p class="font-bold text-[10px] sm:text-xs ${payColor} mt-1">${order.paymentMethod.replace(' (Merchant)', '')}</p>
                             </td>
-                            <td class="px-1 py-3 sm:px-4 sm:py-4 border-r border-slate-800/50 text-center">
-                                <p class="font-mono text-[9px] sm:text-xs text-slate-300 truncate w-14 sm:w-auto mx-auto">${order.trxId}</p>
+                            <td class="w-[28%] px-1 py-4 sm:px-6 border-r border-slate-800/50 text-center">
+                                <p class="font-mono text-[10px] sm:text-xs text-slate-300 truncate w-14 sm:w-auto mx-auto">${order.trxId}</p>
                                 ${sBadge}
                             </td>
-                            <td class="px-2 py-3 sm:px-4 sm:py-4 text-right pr-3 sm:pr-4 align-middle">
+                            <td class="w-[30%] px-2 py-4 sm:px-6 text-right">
                                 ${actionBtns}
                             </td>
                         </tr>
@@ -452,18 +463,8 @@
         }
 
         window.handleQuickAction = async function(action, id, isFromModal = false) {
-            if(action === 'Delete') {
-                if(isFromModal) window.closeDetailsModal();
-                window.showProcessing("ডিলিট হচ্ছে...");
-                setTimeout(async () => {
-                    await deleteDoc(doc(db, "orders", id));
-                    window.hideProcessing(() => window.showCustomAlert("সফল!", "ডিলিট করা হয়েছে।"));
-                }, 800);
-                return;
-            }
-
             if(action === 'Update') {
-                window.showProcessing("তথ্য আপডেট হচ্ছে...");
+                window.showProcessing("তথ্য সেভ হচ্ছে...");
                 setTimeout(async () => {
                     try {
                         await updateDoc(doc(db, "orders", id), {
@@ -495,7 +496,7 @@
         }
 
         window.saveInlineEditFirestore = async function(key, newValue) {
-            window.showProcessing("আপডেট হচ্ছে...");
+            window.showProcessing("ওয়েবসাইট আপডেট হচ্ছে...");
             try {
                 let updates = {};
                 updates[key] = newValue;
@@ -531,7 +532,7 @@
         }
         function scrollToForm() { document.getElementById('orderSection').scrollIntoView({ behavior: 'smooth' }); }
         function copyNagadNumber() { navigator.clipboard.writeText(document.getElementById('display_nagadNumber').innerText); window.showCustomAlert("কপি হয়েছে!", "নগদ নাম্বারটি কপি করা হয়েছে।"); }
-
+        
         window.togglePassword = function() {
             const passInput = document.getElementById('adminPass');
             const eyeIcon = document.getElementById('eyeIcon');
@@ -544,7 +545,6 @@
             document.getElementById('customAlertMessage').innerHTML = message;
             document.getElementById('customAlertIcon').innerHTML = isSuccess ? '✓' : '✕';
             document.getElementById('customAlertIcon').className = isSuccess ? "mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10 text-green-400 text-4xl font-bold" : "mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-500/10 text-red-400 text-4xl font-bold";
-            
             const modal = document.getElementById('customAlertModal');
             modal.classList.remove('hidden'); modal.classList.add('flex');
             setTimeout(() => { document.getElementById('customAlertBox').classList.remove('scale-95', 'opacity-0'); }, 10);
@@ -559,14 +559,13 @@
             document.getElementById('confirmTitle').innerText = title;
             document.getElementById('confirmMessage').innerText = message;
             confirmActionCallback = callback;
-            
             const modal = document.getElementById('customConfirmModal');
             modal.classList.remove('hidden'); modal.classList.add('flex');
             setTimeout(() => { document.getElementById('customConfirmBox').classList.remove('scale-95', 'opacity-0'); }, 10);
         }
         window.closeCustomConfirm = function() {
             document.getElementById('customConfirmBox').classList.add('scale-95', 'opacity-0');
-            setTimeout(() => { document.getElementById('customConfirmModal').classList.add('hidden'); confirmActionCallback = null; }, 300);
+            setTimeout(() => document.getElementById('customConfirmModal').classList.add('hidden'); confirmActionCallback = null; }, 300);
         }
         document.getElementById('confirmActionBtn').addEventListener('click', () => {
             closeCustomConfirm();
@@ -594,12 +593,6 @@
                 if(data.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-2 py-1 rounded text-xs font-bold border border-green-500/20">Confirmed</span>`;
                 if(data.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs font-bold border border-red-500/20">Rejected</span>`;
                 document.getElementById('detStatus').innerHTML = sBadge;
-
-                if(!isPending) {
-                    document.getElementById('modalDeleteBtn').classList.remove('hidden');
-                } else {
-                    document.getElementById('modalDeleteBtn').classList.add('hidden');
-                }
 
                 const modal = document.getElementById('customerDetailsModal');
                 modal.classList.remove('hidden'); modal.classList.add('flex');
@@ -632,10 +625,8 @@
             el.addEventListener('click', function(e) {
                 if(!document.body.classList.contains('edit-mode')) return;
                 e.preventDefault();
-                
                 currentEditKey = this.getAttribute('data-key');
                 document.getElementById('inlineEditTextarea').value = window.currentSettings[currentEditKey] || this.innerText;
-                
                 const modal = document.getElementById('inlineEditModal');
                 modal.classList.remove('hidden'); modal.classList.add('flex');
                 setTimeout(() => { document.getElementById('inlineEditBox').classList.remove('scale-95', 'opacity-0'); }, 10);
