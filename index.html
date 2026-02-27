@@ -137,6 +137,7 @@
     </div>
 
     <div id="adminDashboardView" class="hidden h-screen flex bg-[#0B1120] relative z-30">
+        
         <aside class="w-64 bg-[#111827] border-r border-slate-800 flex-col hidden md:flex">
             <div class="h-20 flex items-center justify-center border-b border-slate-800"><h1 class="text-xl font-bold text-white tracking-wider">Control Panel</h1></div>
             <nav class="flex-1 px-4 py-6 space-y-2">
@@ -178,11 +179,11 @@
 
                 <div class="bg-[#1f2937] rounded-2xl border border-slate-700 overflow-hidden shadow-xl w-full">
                     <table class="w-full text-left table-fixed">
-                        <thead class="bg-[#111827] text-slate-400 text-[10px] sm:text-xs border-b border-slate-700">
+                        <thead class="bg-[#111827] text-slate-400 text-[10px] border-b border-slate-700">
                             <tr>
-                                <th class="w-[42%] px-3 py-3 sm:px-4 sm:py-4 pl-3 sm:pl-4">কাস্টমার (ক্লিক করুন)</th>
-                                <th class="w-[28%] px-1 py-3 sm:px-4 sm:py-4 text-center">স্ট্যাটাস / TrxID</th>
-                                <th class="w-[30%] px-2 py-3 sm:px-4 sm:py-4 text-right pr-3 sm:pr-4">অ্যাকশন</th>
+                                <th class="w-[40%] px-2 py-3 sm:px-4">নাম ও তথ্য</th>
+                                <th class="w-[30%] px-1 py-3 text-center">TrxID / পেমেন্ট</th>
+                                <th class="w-[30%] px-2 py-3 text-right pr-3">অ্যাকশন</th>
                             </tr>
                         </thead>
                         <tbody id="ordersTableBody" class="divide-y divide-slate-800 text-[11px] sm:text-sm">
@@ -216,18 +217,6 @@
         </div>
     </div>
 
-    <div id="customConfirmModal" class="fixed inset-0 z-[310] hidden items-center justify-center px-4">
-        <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" onclick="closeCustomConfirm()"></div>
-        <div id="customConfirmBox" class="relative z-10 w-full max-w-sm transform rounded-3xl bg-[#1f2937] p-8 text-center border border-slate-700 shadow-2xl scale-95 opacity-0 transition-all duration-300">
-            <h3 id="confirmTitle" class="mb-2 text-xl font-bold text-white">নিশ্চিত করুন</h3>
-            <p id="confirmMessage" class="mb-8 text-sm text-slate-300">আপনি কি এই কাজটি করতে চান?</p>
-            <div class="flex gap-3">
-                <button onclick="closeCustomConfirm()" class="flex-1 bg-slate-800 hover:bg-slate-700 py-3.5 rounded-xl font-bold text-white transition-colors border border-slate-600 text-sm">না, বাতিল</button>
-                <button id="confirmActionBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 py-3.5 rounded-xl font-bold text-white transition-colors text-sm">হ্যাঁ, করুন</button>
-            </div>
-        </div>
-    </div>
-
     <div id="customerDetailsModal" class="fixed inset-0 z-[250] hidden items-center justify-center px-4">
         <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" onclick="closeDetailsModal()"></div>
         <div id="detailsBox" class="relative z-10 w-full max-w-md transform rounded-3xl bg-[#1f2937] border border-slate-700 shadow-2xl scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[90vh]">
@@ -248,7 +237,10 @@
                     <div><p class="text-xs text-slate-400 mb-1">বর্তমান স্ট্যাটাস</p><div id="detStatus"></div></div>
                 </div>
                 <div><label class="text-xs text-slate-400 mb-1 block">TrxID</label><input type="text" id="detTrxId" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-3 py-2 text-[#F58220] font-mono tracking-wider font-bold outline-none focus:border-blue-500"></div>
+                
                 <button onclick="handleQuickAction('Update', document.getElementById('modalOrderId').value, true)" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold py-3 rounded-xl transition-colors text-sm mt-2">💾 তথ্যগুলো সেভ করুন</button>
+                
+                <button id="modalDeleteBtn" onclick="handleQuickAction('Delete', document.getElementById('modalOrderId').value, true)" class="hidden w-full bg-red-500/10 hover:bg-red-600 border border-red-500/30 text-red-400 hover:text-white font-bold py-3 rounded-xl transition-colors text-sm mt-2">🗑️ রেকর্ড ডিলিট করুন</button>
             </div>
         </div>
     </div>
@@ -380,7 +372,7 @@
             } catch(error) { window.hideProcessing(() => { window.showCustomAlert("দুঃখিত!", "সমস্যা হয়েছে। আবার চেষ্টা করুন।", false); }); }
         });
 
-        // ================= ADMIN DATA WITH SVG ICONS =================
+        // ================= ADMIN DATA (PERFECT LAYOUT) =================
         window.globalOrders = {}; 
         
         function loadAdminData() {
@@ -407,44 +399,40 @@
                     else if (order.status === 'Confirmed') { stats.confirmed.c++; stats.confirmed.a += amt; }
                     else if (order.status === 'Rejected') { stats.rejected.c++; stats.rejected.a += amt; }
 
-                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-bold mt-1 inline-block">⏳ Pending</span>`;
-                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-bold mt-1 inline-block">✅ Confirmed</span>`;
-                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-bold mt-1 inline-block">❌ Rejected</span>`;
-
                     const payColor = order.paymentMethod.includes('bKash') ? 'text-[#E2136E]' : 'text-[#F58220]';
 
-                    // High visibility action buttons matching screenshot
+                    // 100% Matching Screenshot UI for Buttons
                     let actionBtns = '';
                     if(isPending) {
                         actionBtns = `
-                            <div class="flex gap-2 justify-end pr-1 sm:pr-2">
-                                <button onclick="event.stopPropagation(); handleQuickAction('Confirmed', '${id}')" class="bg-green-600 hover:bg-green-500 text-white w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded shadow-md transition-all">
+                            <div class="flex gap-2 justify-end">
+                                <button onclick="event.stopPropagation(); handleQuickAction('Confirmed', '${id}')" class="bg-green-600 hover:bg-green-700 text-white w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded transition-all">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                 </button>
-                                <button onclick="event.stopPropagation(); handleQuickAction('Rejected', '${id}')" class="bg-red-600 hover:bg-red-500 text-white w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded shadow-md transition-all">
+                                <button onclick="event.stopPropagation(); handleQuickAction('Rejected', '${id}')" class="bg-red-600 hover:bg-red-700 text-white w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded transition-all">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
                                 </button>
                             </div>
                         `;
                     } else {
                         let stText = order.status === 'Confirmed' ? 
-                            '<span class="text-green-500 font-bold text-[11px] sm:text-xs flex items-center justify-end gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg> কনফার্মড</span>' : 
-                            '<span class="text-red-500 font-bold text-[11px] sm:text-xs flex items-center justify-end gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg> রিজেক্টেড</span>';
+                            '<span class="text-green-500 font-bold text-[10px] sm:text-xs flex items-center justify-end gap-1"><svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg> কনফার্মড</span>' : 
+                            '<span class="text-red-500 font-bold text-[10px] sm:text-xs flex items-center justify-end gap-1"><svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg> রিজেক্টেড</span>';
                         actionBtns = stText;
                     }
 
+                    // This matches your working row layout, just adding the SVG action buttons
                     const tr = `
-                        <tr class="hover:bg-[#2d3748] transition-colors cursor-pointer group border-t border-slate-800" onclick="viewCustomerDetails('${id}')">
-                            <td class="w-[42%] px-3 py-4 sm:px-6 border-r border-slate-800/50">
-                                <p class="text-white font-semibold text-xs sm:text-sm truncate max-w-[120px] sm:max-w-[180px] group-hover:text-blue-400 transition-colors">${order.name}</p>
-                                <p class="text-[9px] sm:text-[11px] text-slate-400 mt-1 truncate">${order.phone}</p>
-                                <p class="font-bold text-[10px] sm:text-xs ${payColor} mt-1">${order.paymentMethod.replace(' (Merchant)', '')}</p>
+                        <tr class="hover:bg-[#2d3748] border-t border-slate-800/50 cursor-pointer" onclick="viewCustomerDetails('${id}')">
+                            <td class="p-2 sm:px-4 sm:py-3 border-r border-slate-800/50">
+                                <p class="text-white font-bold text-[11px] sm:text-sm truncate w-24 sm:w-48">${order.name}</p>
+                                <p class="text-[9px] sm:text-xs text-slate-400 mt-0.5">${order.phone}</p>
                             </td>
-                            <td class="w-[28%] px-1 py-4 sm:px-6 border-r border-slate-800/50 text-center">
-                                <p class="font-mono text-[10px] sm:text-xs text-slate-300 truncate w-14 sm:w-auto mx-auto">${order.trxId}</p>
-                                ${sBadge}
+                            <td class="p-2 sm:px-4 sm:py-3 border-r border-slate-800/50 text-center">
+                                <p class="font-bold text-[10px] sm:text-xs ${payColor} mb-0.5">${order.paymentMethod.replace(' (Merchant)', '')}</p>
+                                <p class="font-mono text-[9px] sm:text-xs text-slate-300 truncate w-16 sm:w-auto mx-auto">${order.trxId}</p>
                             </td>
-                            <td class="w-[30%] px-2 py-4 sm:px-6 text-right">
+                            <td class="p-2 sm:px-4 sm:py-3 text-right align-middle pr-3">
                                 ${actionBtns}
                             </td>
                         </tr>
@@ -464,45 +452,41 @@
 
         window.handleQuickAction = async function(action, id, isFromModal = false) {
             if(action === 'Update') {
-                window.showProcessing("তথ্য সেভ হচ্ছে...");
+                window.showProcessing("আপডেট হচ্ছে...");
                 setTimeout(async () => {
-                    try {
-                        await updateDoc(doc(db, "orders", id), {
-                            name: document.getElementById('detName').value,
-                            email: document.getElementById('detEmail').value,
-                            phone: document.getElementById('detPhone').value,
-                            amount: Number(document.getElementById('detAmount').value),
-                            trxId: document.getElementById('detTrxId').value
-                        });
-                        window.hideProcessing(() => {
-                            if(isFromModal) window.closeDetailsModal();
-                            window.showCustomAlert("সফল!", "অর্ডারের তথ্য সেভ হয়েছে।");
-                        });
-                    } catch(e) { window.hideProcessing(() => window.showCustomAlert("ত্রুটি", "সমস্যা হয়েছে।", false)); }
-                }, 800);
+                    await updateDoc(doc(db, "orders", id), {
+                        name: document.getElementById('detName').value,
+                        email: document.getElementById('detEmail').value,
+                        phone: document.getElementById('detPhone').value,
+                        amount: Number(document.getElementById('detAmount').value),
+                        trxId: document.getElementById('detTrxId').value
+                    });
+                    window.hideProcessing(() => { if(isFromModal) window.closeDetailsModal(); });
+                }, 500);
                 return;
             }
 
-            window.showProcessing("স্ট্যাটাস আপডেট হচ্ছে...");
+            if(action === 'Delete') {
+                window.showProcessing("ডিলিট হচ্ছে...");
+                setTimeout(async () => {
+                    await deleteDoc(doc(db, "orders", id));
+                    window.hideProcessing(() => { if(isFromModal) window.closeDetailsModal(); });
+                }, 500);
+                return;
+            }
+
+            window.showProcessing("স্ট্যাটাস আপডেট...");
             setTimeout(async () => {
-                try {
-                    await updateDoc(doc(db, "orders", id), { status: action });
-                    window.hideProcessing(() => {
-                        if(isFromModal) window.closeDetailsModal();
-                        window.showCustomAlert("সফল!", `অর্ডারটি ${action === 'Confirmed' ? 'কনফার্ম' : 'রিজেক্ট'} করা হয়েছে।`);
-                    });
-                } catch(e) { window.hideProcessing(() => window.showCustomAlert("ত্রুটি", "সমস্যা হয়েছে।", false)); }
-            }, 800);
+                await updateDoc(doc(db, "orders", id), { status: action });
+                window.hideProcessing();
+            }, 500);
         }
 
         window.saveInlineEditFirestore = async function(key, newValue) {
-            window.showProcessing("ওয়েবসাইট আপডেট হচ্ছে...");
-            try {
-                let updates = {};
-                updates[key] = newValue;
-                await setDoc(doc(db, "settings", "site_info"), updates, { merge: true });
-                window.hideProcessing(() => window.showCustomAlert("সফল!", "ওয়েবসাইটে লেখাটি পরিবর্তন হয়ে গেছে।"));
-            } catch(e) { window.hideProcessing(() => window.showCustomAlert("ত্রুটি", "আপডেট করতে সমস্যা হয়েছে।", false)); }
+            window.showProcessing("সেভ হচ্ছে...");
+            let updates = {}; updates[key] = newValue;
+            await setDoc(doc(db, "settings", "site_info"), updates, { merge: true });
+            window.hideProcessing();
         }
 
     </script>
@@ -519,19 +503,19 @@
             document.getElementById('bkashArea').classList.add('hidden');
 
             if(method === 'bkash') {
-                document.getElementById('btn-bkash').className = "pay-btn bg-slate-800 border-[#E2136E]";
+                document.getElementById('btn-bkash').classList.add('border-[#E2136E]', 'bg-slate-800');
                 document.getElementById('bkashArea').classList.remove('hidden');
-                btn.className = "w-full bg-[#E2136E] text-white font-bold py-3.5 rounded-xl shadow-lg mt-2 transition-transform hover:-translate-y-1";
-                btn.innerText = "বিকাশ দিয়ে পেমেন্ট করুন";
+                btn.className = "w-full bg-[#E2136E] text-white font-bold py-3 rounded-xl mt-2";
+                btn.innerText = "বিকাশ পেমেন্ট";
             } else {
-                document.getElementById('btn-nagad').className = "pay-btn bg-slate-800 border-[#F58220]";
+                document.getElementById('btn-nagad').classList.add('border-[#F58220]', 'bg-slate-800');
                 document.getElementById('nagadArea').classList.remove('hidden');
-                btn.className = "w-full bg-[#F58220] text-white font-bold py-3.5 rounded-xl shadow-lg mt-2 transition-transform hover:-translate-y-1";
+                btn.className = "w-full bg-[#F58220] text-white font-bold py-3 rounded-xl mt-2";
                 btn.innerText = "অর্ডার কনফার্ম করুন";
             }
         }
         function scrollToForm() { document.getElementById('orderSection').scrollIntoView({ behavior: 'smooth' }); }
-        function copyNagadNumber() { navigator.clipboard.writeText(document.getElementById('display_nagadNumber').innerText); window.showCustomAlert("কপি হয়েছে!", "নগদ নাম্বারটি কপি করা হয়েছে।"); }
+        function copyNagadNumber() { navigator.clipboard.writeText(document.getElementById('display_nagadNumber').innerText); alert("কপি হয়েছে!"); }
         
         window.togglePassword = function() {
             const passInput = document.getElementById('adminPass');
@@ -554,58 +538,42 @@
             setTimeout(() => document.getElementById('customAlertModal').classList.add('hidden'), 300);
         }
 
-        let confirmActionCallback = null;
-        window.showCustomConfirm = function(title, message, callback) {
-            document.getElementById('confirmTitle').innerText = title;
-            document.getElementById('confirmMessage').innerText = message;
-            confirmActionCallback = callback;
-            const modal = document.getElementById('customConfirmModal');
-            modal.classList.remove('hidden'); modal.classList.add('flex');
-            setTimeout(() => { document.getElementById('customConfirmBox').classList.remove('scale-95', 'opacity-0'); }, 10);
-        }
-        window.closeCustomConfirm = function() {
-            document.getElementById('customConfirmBox').classList.add('scale-95', 'opacity-0');
-            setTimeout(() => document.getElementById('customConfirmModal').classList.add('hidden'); confirmActionCallback = null; }, 300);
-        }
-        document.getElementById('confirmActionBtn').addEventListener('click', () => {
-            closeCustomConfirm();
-            if(confirmActionCallback) confirmActionCallback();
-        });
-
+        // The instant popup opening fix (no processing overlay here)
         window.viewCustomerDetails = function(id) {
-            window.showProcessing("লোড হচ্ছে...");
-            setTimeout(() => {
-                window.hideProcessing();
-                const data = window.globalOrders[id];
-                if(!data) return;
-                
-                document.getElementById('modalOrderId').value = id;
-                document.getElementById('detName').value = data.name;
-                document.getElementById('detEmail').value = data.email;
-                document.getElementById('detPhone').value = data.phone;
-                document.getElementById('detAmount').value = data.amount;
-                document.getElementById('detMethod').innerText = data.paymentMethod;
-                document.getElementById('detTrxId').value = data.trxId || '';
-                
-                const isPending = data.status && data.status.includes('Pending');
-                
-                let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-2 py-1 rounded text-xs font-bold border border-yellow-500/20">Pending</span>`;
-                if(data.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-2 py-1 rounded text-xs font-bold border border-green-500/20">Confirmed</span>`;
-                if(data.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs font-bold border border-red-500/20">Rejected</span>`;
-                document.getElementById('detStatus').innerHTML = sBadge;
+            const data = window.globalOrders[id];
+            if(!data) return;
+            
+            document.getElementById('modalOrderId').value = id;
+            document.getElementById('detName').value = data.name;
+            document.getElementById('detEmail').value = data.email;
+            document.getElementById('detPhone').value = data.phone;
+            document.getElementById('detAmount').value = data.amount || 26;
+            document.getElementById('detMethod').innerText = data.paymentMethod;
+            document.getElementById('detTrxId').value = data.trxId || '';
+            
+            const isPending = data.status && data.status.includes('Pending');
+            
+            let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-2 py-1 rounded text-xs font-bold border border-yellow-500/20">Pending</span>`;
+            if(data.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-2 py-1 rounded text-xs font-bold border border-green-500/20">Confirmed</span>`;
+            if(data.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs font-bold border border-red-500/20">Rejected</span>`;
+            document.getElementById('detStatus').innerHTML = sBadge;
 
-                const modal = document.getElementById('customerDetailsModal');
-                modal.classList.remove('hidden'); modal.classList.add('flex');
-                setTimeout(() => { document.getElementById('detailsBox').classList.remove('scale-95', 'opacity-0'); }, 10);
-            }, 300); 
+            if(!isPending) {
+                document.getElementById('modalDeleteBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('modalDeleteBtn').classList.add('hidden');
+            }
+
+            const modal = document.getElementById('customerDetailsModal');
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+            setTimeout(() => { document.getElementById('detailsBox').classList.remove('scale-95', 'opacity-0'); }, 10);
         }
         window.closeDetailsModal = function() {
             document.getElementById('detailsBox').classList.add('scale-95', 'opacity-0');
-            setTimeout(() => document.getElementById('customerDetailsModal').classList.add('hidden'), 300);
+            setTimeout(() => document.getElementById('customerDetailsModal').classList.add('hidden'), 200);
         }
 
         let currentEditKey = '';
-        
         window.enterEditMode = function() {
             document.getElementById('adminDashboardView').classList.add('hidden');
             document.getElementById('publicWebsiteView').classList.remove('hidden');
@@ -613,14 +581,12 @@
             document.body.classList.add('edit-mode');
             window.scrollTo(0,0);
         }
-        
         window.exitEditMode = function() {
             document.getElementById('editModeBanner').classList.add('hidden');
             document.body.classList.remove('edit-mode');
             document.getElementById('publicWebsiteView').classList.add('hidden');
             document.getElementById('adminDashboardView').classList.remove('hidden');
         }
-
         document.querySelectorAll('.editable-text').forEach(el => {
             el.addEventListener('click', function(e) {
                 if(!document.body.classList.contains('edit-mode')) return;
@@ -632,18 +598,14 @@
                 setTimeout(() => { document.getElementById('inlineEditBox').classList.remove('scale-95', 'opacity-0'); }, 10);
             });
         });
-
         window.closeInlineEditModal = function() {
             document.getElementById('inlineEditBox').classList.add('scale-95', 'opacity-0');
-            setTimeout(() => document.getElementById('inlineEditModal').classList.add('hidden'), 300);
+            setTimeout(() => document.getElementById('inlineEditModal').classList.add('hidden'), 200);
         }
-
         window.saveInlineEdit = function() {
             const newValue = document.getElementById('inlineEditTextarea').value;
             closeInlineEditModal();
-            if(window.saveInlineEditFirestore) {
-                window.saveInlineEditFirestore(currentEditKey, newValue);
-            }
+            if(window.saveInlineEditFirestore) window.saveInlineEditFirestore(currentEditKey, newValue);
         }
 
         window.triggerAdminLogin = function() {
