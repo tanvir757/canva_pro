@@ -11,12 +11,10 @@
         .canva-gradient { background: linear-gradient(135deg, #00C4CC, #7D2AE8); }
         .text-gradient { background: linear-gradient(to right, #00C4CC, #7D2AE8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* Premium Spinner */
         .premium-spinner { width: 50px; height: 50px; border-radius: 50%; background: conic-gradient(from 0deg, #00C4CC, #7D2AE8, #00C4CC); animation: spin 1s linear infinite; position: relative; }
         .premium-spinner::before { content: ''; position: absolute; inset: 4px; background-color: #0B1120; border-radius: 50%; }
         @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: #0B1120; }
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 10px; }
@@ -139,6 +137,7 @@
     </div>
 
     <div id="adminDashboardView" class="hidden h-screen flex bg-[#0B1120] relative z-30">
+        
         <aside class="w-64 bg-[#111827] border-r border-slate-800 flex-col hidden md:flex">
             <div class="h-20 flex items-center justify-center border-b border-slate-800"><h1 class="text-xl font-bold text-white tracking-wider">Control Panel</h1></div>
             <nav class="flex-1 px-4 py-6 space-y-2">
@@ -179,16 +178,15 @@
                 </div>
 
                 <div class="bg-[#1f2937] rounded-2xl border border-slate-700 overflow-hidden shadow-xl w-full">
-                    <table class="w-full text-left">
-                        <thead class="bg-[#111827] text-slate-400 text-[9px] sm:text-xs border-b border-slate-700">
+                    <table class="w-full text-left table-fixed">
+                        <thead class="bg-[#111827] text-slate-400 text-[10px] sm:text-xs border-b border-slate-700">
                             <tr>
-                                <th class="px-2 py-3 sm:px-4 sm:py-4">কাস্টমার (ক্লিক)</th>
-                                <th class="px-1 py-3 sm:px-4 sm:py-4 text-center">পেমেন্ট</th>
-                                <th class="px-1 py-3 sm:px-4 sm:py-4 text-center">স্ট্যাটাস / TrxID</th>
-                                <th class="px-2 py-3 sm:px-4 sm:py-4 text-right">অ্যাকশন</th>
+                                <th class="w-[45%] px-3 py-3 sm:px-4 sm:py-4">কাস্টমার (ক্লিক করুন)</th>
+                                <th class="w-[25%] px-1 py-3 sm:px-4 sm:py-4 text-center">স্ট্যাটাস / TrxID</th>
+                                <th class="w-[30%] px-2 py-3 sm:px-4 sm:py-4 text-right pr-4">অ্যাকশন</th>
                             </tr>
                         </thead>
-                        <tbody id="ordersTableBody" class="divide-y divide-slate-800 text-[10px] sm:text-sm">
+                        <tbody id="ordersTableBody" class="divide-y divide-slate-800 text-[11px] sm:text-sm">
                             </tbody>
                     </table>
                 </div>
@@ -219,18 +217,6 @@
         </div>
     </div>
 
-    <div id="customConfirmModal" class="fixed inset-0 z-[310] hidden items-center justify-center px-4">
-        <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" onclick="closeCustomConfirm()"></div>
-        <div id="customConfirmBox" class="relative z-10 w-full max-w-sm transform rounded-3xl bg-[#1f2937] p-8 text-center border border-slate-700 shadow-2xl scale-95 opacity-0 transition-all duration-300">
-            <h3 id="confirmTitle" class="mb-2 text-xl font-bold text-white">নিশ্চিত করুন</h3>
-            <p id="confirmMessage" class="mb-8 text-sm text-slate-300">আপনি কি এই কাজটি করতে চান?</p>
-            <div class="flex gap-3">
-                <button onclick="closeCustomConfirm()" class="flex-1 bg-slate-800 hover:bg-slate-700 py-3.5 rounded-xl font-bold text-white transition-colors border border-slate-600 text-sm">না, বাতিল</button>
-                <button id="confirmActionBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 py-3.5 rounded-xl font-bold text-white transition-colors text-sm">হ্যাঁ, করুন</button>
-            </div>
-        </div>
-    </div>
-
     <div id="customerDetailsModal" class="fixed inset-0 z-[250] hidden items-center justify-center px-4">
         <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" onclick="closeDetailsModal()"></div>
         <div id="detailsBox" class="relative z-10 w-full max-w-md transform rounded-3xl bg-[#1f2937] border border-slate-700 shadow-2xl scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[90vh]">
@@ -248,10 +234,13 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800">
                     <div><p class="text-xs text-slate-400 mb-1">পেমেন্ট মাধ্যম</p><p id="detMethod" class="text-white font-bold"></p></div>
-                    <div><p class="text-xs text-slate-400 mb-1">স্ট্যাটাস</p><div id="detStatus"></div></div>
+                    <div><p class="text-xs text-slate-400 mb-1">বর্তমান স্ট্যাটাস</p><div id="detStatus"></div></div>
                 </div>
                 <div><label class="text-xs text-slate-400 mb-1 block">TrxID</label><input type="text" id="detTrxId" class="w-full bg-[#0B1120] border border-slate-700 rounded-lg px-3 py-2 text-[#F58220] font-mono tracking-wider font-bold outline-none focus:border-blue-500"></div>
+                
                 <button onclick="handleQuickAction('Update', document.getElementById('modalOrderId').value, true)" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold py-3 rounded-xl transition-colors text-sm mt-2">💾 তথ্যগুলো সেভ করুন</button>
+                
+                <button id="modalDeleteBtn" onclick="handleQuickAction('Delete', document.getElementById('modalOrderId').value, true)" class="hidden w-full bg-red-500/10 hover:bg-red-600 border border-red-500/30 text-red-400 hover:text-white font-bold py-3 rounded-xl transition-colors text-sm mt-2">🗑️ রেকর্ড ডিলিট করুন</button>
             </div>
         </div>
     </div>
@@ -270,7 +259,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, doc, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, doc, updateDoc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         const firebaseConfig = {
@@ -396,7 +385,7 @@
                 let stats = { total: { c: 0, a: 0 }, pending: { c: 0, a: 0 }, confirmed: { c: 0, a: 0 }, rejected: { c: 0, a: 0 } };
 
                 if(snapshot.empty) {
-                    tbody.innerHTML = `<tr><td colspan="4" class="px-4 py-8 text-center text-slate-500 text-sm">কোনো অর্ডার নেই।</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="3" class="px-4 py-8 text-center text-slate-500 text-sm">কোনো অর্ডার নেই।</td></tr>`;
                     updateStatsDOM(stats); return;
                 }
 
@@ -406,49 +395,48 @@
                     window.globalOrders[id] = order;
                     const amt = Number(order.amount) || 0;
                     
+                    // THIS FIXES THE BUG: Checking if status contains 'Pending' instead of exact match
+                    const isPending = order.status && order.status.includes('Pending');
+                    
                     stats.total.c++; stats.total.a += amt;
-                    if (order.status === 'Pending') { stats.pending.c++; stats.pending.a += amt; }
+                    if (isPending) { stats.pending.c++; stats.pending.a += amt; }
                     else if (order.status === 'Confirmed') { stats.confirmed.c++; stats.confirmed.a += amt; }
                     else if (order.status === 'Rejected') { stats.rejected.c++; stats.rejected.a += amt; }
 
-                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold">Pending</span>`;
-                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold">Confirm</span>`;
-                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold">Reject</span>`;
+                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold mt-1 inline-block">⏳ Pending</span>`;
+                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold mt-1 inline-block">✅ Confirmed</span>`;
+                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold mt-1 inline-block">❌ Rejected</span>`;
 
                     const payColor = order.paymentMethod.includes('bKash') ? 'text-[#E2136E]' : 'text-[#F58220]';
 
-                    // NO DELETE BUTTON. ONLY CONFIRM AND REJECT!
+                    // NO DELETE BUTTON IN TABLE! ONLY CONFIRM AND REJECT!
                     let actionBtns = '';
-                    if(order.status === 'Pending') {
+                    if(isPending) {
                         actionBtns = `
-                            <div class="flex gap-1 justify-end">
-                                <button onclick="event.stopPropagation(); handleQuickAction('Confirmed', '${id}')" class="bg-green-600/20 text-green-400 hover:bg-green-600 hover:text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded flex items-center justify-center transition-all border border-green-500/30" title="কনফার্ম">
-                                    ✅ <span class="hidden sm:inline ml-1 text-[11px]">কনফার্ম</span>
-                                </button>
-                                <button onclick="event.stopPropagation(); handleQuickAction('Rejected', '${id}')" class="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded flex items-center justify-center transition-all border border-red-500/30" title="রিজেক্ট">
-                                    ❌ <span class="hidden sm:inline ml-1 text-[11px]">রিজেক্ট</span>
-                                </button>
+                            <div class="flex gap-1.5 justify-end">
+                                <button onclick="event.stopPropagation(); handleQuickAction('Confirmed', '${id}')" class="bg-green-600/20 text-green-400 hover:bg-green-600 hover:text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold transition-all border border-green-500/30">✅</button>
+                                <button onclick="event.stopPropagation(); handleQuickAction('Rejected', '${id}')" class="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold transition-all border border-red-500/30">❌</button>
                             </div>
                         `;
                     } else {
-                        // If already processed, just show text, NO buttons to save space.
-                        actionBtns = `<span class="text-[10px] sm:text-xs text-slate-500 font-bold mr-2">সম্পন্ন</span>`;
+                        // NO DELETE BUTTON. JUST STATUS TEXT.
+                        let statusText = order.status === 'Confirmed' ? '✅ কনফার্মড' : '❌ রিজেক্টেড';
+                        actionBtns = `<span class="text-[10px] sm:text-xs text-slate-500 font-bold">${statusText}</span>`;
                     }
 
+                    // 3 Columns Total to avoid overflow
                     const tr = `
                         <tr class="hover:bg-[#2d3748] transition-colors cursor-pointer border-t border-slate-800" onclick="viewCustomerDetails('${id}')">
-                            <td class="px-2 py-3 sm:px-4 sm:py-4 border-r border-slate-800/50">
-                                <p class="text-white font-semibold text-[11px] sm:text-sm truncate w-24 sm:w-auto">${order.name}</p>
+                            <td class="w-[45%] px-3 py-3 sm:px-4 sm:py-4 border-r border-slate-800/50">
+                                <p class="text-white font-semibold text-[11px] sm:text-sm truncate w-32 sm:w-auto">${order.name}</p>
                                 <p class="text-[9px] sm:text-xs text-slate-400 truncate">${order.phone}</p>
+                                <span class="font-bold text-[9px] sm:text-xs ${payColor}">${order.paymentMethod.replace(' (Merchant)', '')}</span>
                             </td>
-                            <td class="px-1 py-3 sm:px-4 sm:py-4 font-bold text-[10px] sm:text-sm ${payColor} border-r border-slate-800/50 text-center">
-                                ${order.paymentMethod.replace(' (Merchant)', '')}
-                            </td>
-                            <td class="px-1 py-3 sm:px-4 sm:py-4 border-r border-slate-800/50 text-center">
-                                <p class="font-mono text-[9px] sm:text-xs text-slate-300 mb-1 truncate w-16 sm:w-auto mx-auto">${order.trxId}</p>
+                            <td class="w-[30%] px-1 py-3 sm:px-4 sm:py-4 border-r border-slate-800/50 text-center">
+                                <p class="font-mono text-[9px] sm:text-xs text-slate-300 truncate w-16 sm:w-auto mx-auto">${order.trxId}</p>
                                 ${sBadge}
                             </td>
-                            <td class="px-2 py-3 sm:px-4 sm:py-4 text-right">
+                            <td class="w-[25%] px-3 py-3 sm:px-4 sm:py-4 text-right pr-4">
                                 ${actionBtns}
                             </td>
                         </tr>
@@ -468,6 +456,17 @@
 
         // ================= QUICK ACTION LOGIC =================
         window.handleQuickAction = async function(action, id, isFromModal = false) {
+            if(action === 'Delete') {
+                if(isFromModal) window.closeDetailsModal();
+                // We only allow delete from inside the modal, if user really wants to.
+                window.showProcessing("ডিলিট হচ্ছে...");
+                setTimeout(async () => {
+                    await deleteDoc(doc(db, "orders", id));
+                    window.hideProcessing(() => window.showCustomAlert("সফল!", "ডিলিট করা হয়েছে।"));
+                }, 800);
+                return;
+            }
+
             if(action === 'Update') {
                 window.showProcessing("তথ্য আপডেট হচ্ছে...");
                 setTimeout(async () => {
@@ -488,7 +487,7 @@
                 return;
             }
 
-            // Confirm or Reject Only
+            // Confirm or Reject
             window.showProcessing("স্ট্যাটাস আপডেট হচ্ছে...");
             setTimeout(async () => {
                 try {
@@ -561,25 +560,6 @@
             setTimeout(() => document.getElementById('customAlertModal').classList.add('hidden'), 300);
         }
 
-        let confirmActionCallback = null;
-        window.showCustomConfirm = function(title, message, callback) {
-            document.getElementById('confirmTitle').innerText = title;
-            document.getElementById('confirmMessage').innerText = message;
-            confirmActionCallback = callback;
-            const modal = document.getElementById('customConfirmModal');
-            modal.classList.remove('hidden'); modal.classList.add('flex');
-            setTimeout(() => { document.getElementById('customConfirmBox').classList.remove('scale-95', 'opacity-0'); }, 10);
-        }
-        window.closeCustomConfirm = function() {
-            document.getElementById('customConfirmBox').classList.add('scale-95', 'opacity-0');
-            setTimeout(() => { document.getElementById('customConfirmModal').classList.add('hidden'); confirmActionCallback = null; }, 300);
-        }
-        document.getElementById('confirmActionBtn').addEventListener('click', () => {
-            closeCustomConfirm();
-            if(confirmActionCallback) confirmActionCallback();
-        });
-
-        // Details Modal
         window.viewCustomerDetails = function(id) {
             window.showProcessing("লোড হচ্ছে...");
             setTimeout(() => {
@@ -595,10 +575,18 @@
                 document.getElementById('detMethod').innerText = data.paymentMethod;
                 document.getElementById('detTrxId').value = data.trxId || '';
                 
+                const isPending = data.status && data.status.includes('Pending');
+                
                 let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-2 py-1 rounded text-xs font-bold border border-yellow-500/20">Pending</span>`;
                 if(data.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-2 py-1 rounded text-xs font-bold border border-green-500/20">Confirmed</span>`;
                 if(data.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs font-bold border border-red-500/20">Rejected</span>`;
                 document.getElementById('detStatus').innerHTML = sBadge;
+
+                if(!isPending) {
+                    document.getElementById('modalDeleteBtn').classList.remove('hidden');
+                } else {
+                    document.getElementById('modalDeleteBtn').classList.add('hidden');
+                }
 
                 const modal = document.getElementById('customerDetailsModal');
                 modal.classList.remove('hidden'); modal.classList.add('flex');
