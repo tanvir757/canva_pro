@@ -1,238 +1,224 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canva Pro - স্বাধীনতা দিবস অফার</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Hind Siliguri', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-        }
-        .canva-gradient {
-            background: linear-gradient(135deg, #00C4CC, #7D2AE8);
-        }
-        .text-gradient {
-            background: linear-gradient(to right, #00C4CC, #7D2AE8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        /* Premium Spinner CSS */
-        .premium-spinner {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, #00C4CC, #7D2AE8, #00C4CC);
-            animation: spin 1s linear infinite;
-            position: relative;
-        }
-        .premium-spinner::before {
-            content: '';
-            position: absolute;
-            inset: 5px;
-            background-color: #0f172a; /* Matches body background */
-            border-radius: 50%;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        body { font-family: 'Hind Siliguri', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .canva-gradient { background: linear-gradient(135deg, #00C4CC, #7D2AE8); }
+        .text-gradient { background: linear-gradient(to right, #00C4CC, #7D2AE8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .premium-spinner { width: 60px; height: 60px; border-radius: 50%; background: conic-gradient(from 0deg, #00C4CC, #7D2AE8, #00C4CC); animation: spin 1s linear infinite; position: relative; }
+        .premium-spinner::before { content: ''; position: absolute; inset: 5px; background-color: #0f172a; border-radius: 50%; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        /* Scrollbar for Admin */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-purple-500 selection:text-white">
 
-    <section class="pt-10 pb-10 sm:pt-16 sm:pb-12 lg:pt-20 lg:pb-16 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 relative">
-        <div class="absolute top-10 left-4 sm:left-10 w-48 sm:w-72 h-48 sm:h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div class="absolute top-10 right-4 sm:right-10 w-48 sm:w-72 h-48 sm:h-72 bg-cyan-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+    <div id="publicWebsiteView" class="block">
+        <section class="pt-10 pb-10 sm:pt-16 sm:pb-12 lg:pt-20 lg:pb-16 flex flex-col justify-center items-center px-4 relative">
+            <div class="absolute top-10 left-4 w-48 h-48 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+            <div class="absolute top-10 right-4 w-48 h-48 bg-cyan-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
 
-        <div class="max-w-3xl text-center relative z-10 w-full">
-            <span class="inline-flex items-center gap-2 py-1.5 px-4 sm:px-5 rounded-full bg-red-900/30 text-red-400 text-xs sm:text-sm font-bold tracking-wider mb-4 sm:mb-5 border border-red-700/50 shadow-lg">
-                <span>🇧🇩</span> মহান স্বাধীনতা দিবস স্পেশাল অফার!
-            </span>
-            
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-5 leading-tight">
-                আপনার ডিজাইনের স্বাধীনতায় <br class="hidden sm:block"> <span class="text-gradient">Canva Pro</span> এর ছোঁয়া!
-            </h1>
-            
-            <p class="text-base sm:text-lg text-slate-300 mb-6 sm:mb-8 leading-relaxed max-w-2xl mx-auto px-2 sm:px-0">
-                স্বাধীনতা দিবস উপলক্ষে ক্যানভার সকল প্রিমিয়াম ফিচার এখন আপনার হাতের মুঠোয়! হাজারো প্রিমিয়াম টেমপ্লেট দিয়ে স্বাধীনভাবে ডিজাইন করুন। <strong class="text-white text-lg sm:text-xl block sm:inline mt-1 sm:mt-0">অফারটি শুধুমাত্র সীমিত সময়ের জন্য!</strong>
-            </p>
-            
-            <div class="mb-6 sm:mb-8 flex justify-center items-center">
-                <div class="flex flex-col items-center bg-slate-800/50 py-3 px-10 sm:py-4 sm:px-12 rounded-3xl border border-slate-700 backdrop-blur-sm shadow-xl">
-                    <span class="text-5xl sm:text-6xl font-extrabold text-white tracking-tight">৳ ২৬</span>
-                    <span class="text-xs sm:text-sm text-cyan-400 mt-1.5 sm:mt-2 font-semibold tracking-wide uppercase">পুরো ৩ বছরের ফুল অ্যাক্সেস</span>
+            <div class="max-w-3xl text-center relative z-10 w-full">
+                <span class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-red-900/30 text-red-400 text-xs sm:text-sm font-bold tracking-wider mb-4 border border-red-700/50 shadow-lg">🇧🇩 মহান স্বাধীনতা দিবস স্পেশাল অফার!</span>
+                
+                <h1 id="display_title" class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4 leading-tight">আপনার ডিজাইনের স্বাধীনতায় <br class="hidden sm:block"> <span class="text-gradient">Canva Pro</span> এর ছোঁয়া!</h1>
+                
+                <p class="text-base sm:text-lg text-slate-300 mb-6 leading-relaxed max-w-2xl mx-auto">স্বাধীনতা দিবস উপলক্ষে ক্যানভার সকল প্রিমিয়াম ফিচার এখন আপনার হাতের মুঠোয়! হাজারো প্রিমিয়াম টেমপ্লেট দিয়ে স্বাধীনভাবে ডিজাইন করুন। <strong class="text-white text-lg">অফারটি শুধুমাত্র সীমিত সময়ের জন্য!</strong></p>
+                
+                <div class="mb-6 flex justify-center items-center">
+                    <div class="flex flex-col items-center bg-slate-800/50 py-3 px-10 rounded-3xl border border-slate-700 shadow-xl">
+                        <span id="display_price" class="text-5xl sm:text-6xl font-extrabold text-white tracking-tight">৳ ২৬</span>
+                        <span id="display_duration" class="text-xs sm:text-sm text-cyan-400 mt-1.5 font-semibold tracking-wide uppercase">পুরো ৩ বছরের ফুল অ্যাক্সেস</span>
+                    </div>
+                </div>
+                
+                <button onclick="scrollToForm()" class="w-full sm:w-auto canva-gradient hover:opacity-90 text-white font-bold py-3.5 px-10 rounded-full text-lg shadow-[0_0_20px_rgba(125,42,232,0.4)] transition-all transform hover:scale-105">অফারটি লুফে নিতে এখানে চাপ দিন</button>
+            </div>
+        </section>
+
+        <section class="pt-10 pb-12 bg-slate-900 border-t border-slate-800 relative z-10">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 text-white">কেন এই অফারটি মিস করবেন না?</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <div class="w-12 h-12 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-2xl mb-4">🔒</div>
+                        <h3 class="text-lg font-bold mb-2 text-white">নিজস্ব মেইলে অ্যাক্সেস</h3>
+                        <p class="text-sm text-slate-400">পাসওয়ার্ড শেয়ারের প্রয়োজন নেই। আপনার নিজের ইমেইলেই অফিশিয়াল ইনভাইটেশন পাঠানো হবে।</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <div class="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-2xl mb-4">📅</div>
+                        <h3 class="text-lg font-bold mb-2 text-white">পুরো ৩ বছরের মেয়াদ</h3>
+                        <p class="text-sm text-slate-400">১-২ মাসের কোনো ঝামেলা নেই! মাত্র ২৬ টাকায় একটানা ৩ বছর নিশ্চিন্তে ক্যানভা প্রো ব্যবহার করার সুযোগ।</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <div class="w-12 h-12 bg-pink-500/10 text-pink-400 rounded-xl flex items-center justify-center text-2xl mb-4">🛡️</div>
+                        <h3 class="text-lg font-bold mb-2 text-white">১০০% গ্যারান্টি</h3>
+                        <p class="text-sm text-slate-400">সাথে থাকছে ১ বছরের রিপ্লেসমেন্ট ওয়ারেন্টি। যেকোনো সমস্যায় আমরা আছি আপনার পাশে।</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-2xl mb-4">👑</div>
+                        <h3 class="text-lg font-bold mb-2 text-white">আনলিমিটেড প্রো ফিচার</h3>
+                        <p class="text-sm text-slate-400">আনলিমিটেড প্রিমিয়াম টেমপ্লেট, ব্যাকগ্রাউন্ড রিমুভার, ম্যাজিক রিসাইজ এবং ক্যানভার সকল এআই টুলস আনলকড!</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <div class="w-12 h-12 bg-orange-500/10 text-orange-400 rounded-xl flex items-center justify-center text-2xl mb-4">🌐</div>
+                        <h3 class="text-lg font-bold mb-2 text-white">সোশ্যাল মিডিয়া শিডিউলিং</h3>
+                        <p class="text-sm text-slate-400">ক্যানভা থেকেই সরাসরি আপনার ফেসবুক, ইন্সটাগ্রাম বা অন্যান্য সোশ্যাল মিডিয়ার পোস্ট স্বয়ংক্রিয়ভাবে শিডিউল করুন।</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                        <div class="w-12 h-12 bg-green-500/10 text-green-400 rounded-xl flex items-center justify-center text-2xl mb-4">⚡</div>
+                        <h3 class="text-lg font-bold mb-2 text-white">ইনস্ট্যান্ট ডেলিভারি</h3>
+                        <p class="text-sm text-slate-400">অর্ডার করার সাথে সাথেই আপনার ইমেইল চেক করবেন। সম্পূর্ণ সিকিউর এবং রিলায়েবল সার্ভিস।</p>
+                    </div>
                 </div>
             </div>
-            
-            <button onclick="scrollToForm()" class="w-full sm:w-auto canva-gradient hover:opacity-90 text-white font-bold py-3.5 sm:py-4 px-6 sm:px-10 rounded-full text-lg sm:text-xl shadow-[0_0_20px_rgba(125,42,232,0.4)] transition-all transform hover:scale-105 hover:-translate-y-1">
-                অফারটি লুফে নিতে এখানে চাপ দিন
-            </button>
-            
-            <p class="mt-4 sm:mt-5 text-xs sm:text-sm font-semibold text-red-400 animate-pulse">
-                ⏳ স্লট সংখ্যা সীমিত! আজই ইনভাইটেশন কনফার্ম করুন
-            </p>
-        </div>
-    </section>
+        </section>
 
-    <section class="pt-10 pb-12 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 bg-slate-900 border-t border-slate-800 relative z-10">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-white">কেন এই অফারটি মিস করবেন না?</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-                <div class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 hover:border-cyan-500 transition-colors group">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-2xl sm:text-3xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">🔒</div>
-                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">নিজস্ব মেইলে অ্যাক্সেস</h3>
-                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed">পাসওয়ার্ড শেয়ারের প্রয়োজন নেই। আপনার নিজের ইমেইলেই অফিশিয়াল ইনভাইটেশন পাঠানো হবে (No Shared Password)।</p>
-                </div>
-                <div class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 hover:border-purple-500 transition-colors group">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-2xl sm:text-3xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">📅</div>
-                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">পুরো ৩ বছরের মেয়াদ</h3>
-                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed">১-২ মাসের কোনো ঝামেলা নেই! মাত্র ২৬ টাকায় একটানা ৩ বছর নিশ্চিন্তে ক্যানভা প্রো ব্যবহার করার সুযোগ।</p>
-                </div>
-                <div class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 hover:border-pink-500 transition-colors group">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-pink-500/10 text-pink-400 rounded-xl flex items-center justify-center text-2xl sm:text-3xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">🛡️</div>
-                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">১০০% গ্যারান্টি</h3>
-                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed">সাথে থাকছে ১ বছরের রিপ্লেসমেন্ট ওয়ারেন্টি। যেকোনো সমস্যায় আমরা আছি আপনার পাশে।</p>
-                </div>
-                <div class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition-colors group">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-2xl sm:text-3xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">👑</div>
-                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">আনলিমিটেড প্রো ফিচার</h3>
-                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed">আনলিমিটেড প্রিমিয়াম টেমপ্লেট, ব্যাকগ্রাউন্ড রিমুভার, ম্যাজিক রিসাইজ এবং ক্যানভার সকল এআই টুলস আনলকড!</p>
-                </div>
-                <div class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 hover:border-orange-500 transition-colors group">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-orange-500/10 text-orange-400 rounded-xl flex items-center justify-center text-2xl sm:text-3xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">🌐</div>
-                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">সোশ্যাল মিডিয়া শিডিউলিং</h3>
-                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed">ক্যানভা থেকেই সরাসরি আপনার ফেসবুক, ইন্সটাগ্রাম বা অন্যান্য সোশ্যাল মিডিয়ার পোস্ট স্বয়ংক্রিয়ভাবে শিডিউল করুন।</p>
-                </div>
-                <div class="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 hover:border-green-500 transition-colors group">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-green-500/10 text-green-400 rounded-xl flex items-center justify-center text-2xl sm:text-3xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">⚡</div>
-                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">ইনস্ট্যান্ট ডেলিভারি</h3>
-                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed">অর্ডার করার সাথে সাথেই আপনার ইমেইল চেক করবেন। সম্পূর্ণ সিকিউর এবং রিলায়েবল সার্ভিস।</p>
-                </div>
-            </div>
-
-            <div class="mt-12 sm:mt-16 bg-gradient-to-r from-slate-800 to-slate-800/50 rounded-2xl p-6 sm:p-8 border border-slate-700 text-center shadow-lg">
-                <p class="text-lg sm:text-xl text-slate-300 font-medium">
-                    শুনতে অবিশ্বাস্য লাগছে? <span class="text-white font-bold bg-blue-500/20 px-2 py-1 rounded">মাত্র ২৬ টাকার</span> এই ছোট্ট বিনিয়োগে আজই যাচাই করে দেখুন আমাদের সার্ভিসের মান! <br class="hidden sm:block"> অসংখ্য সন্তুষ্ট গ্রাহকের এই এক্সক্লুসিভ ক্লাবে আপনাকে সাদর আমন্ত্রণ।
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="orderSection" class="pt-16 pb-20 sm:pt-24 sm:pb-28 bg-slate-950 border-t border-slate-800 relative z-10">
-        <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-slate-800 rounded-3xl p-6 sm:p-10 border border-slate-700 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl"></div>
-                <div class="absolute bottom-0 left-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl"></div>
-
-                <div class="relative z-10">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-center text-white mb-2">অফারটি নিশ্চিত করুন</h2>
+        <section id="orderSection" class="pt-16 pb-20 bg-slate-950 border-t border-slate-800 relative z-10">
+            <div class="max-w-xl mx-auto px-4">
+                <div class="bg-slate-800 rounded-3xl p-6 sm:p-10 border border-slate-700 shadow-2xl relative">
+                    <h2 class="text-2xl font-bold text-center text-white mb-2">অফারটি নিশ্চিত করুন</h2>
                     <p class="text-center text-sm text-slate-400 mb-8">ইনভাইটেশন পেতে আপনার সঠিক ক্যানভা ইমেইল দিন</p>
                     
                     <form id="checkoutForm">
-                        <div class="space-y-4 sm:space-y-5">
-                            <div>
-                                <label class="block text-xs sm:text-sm font-medium text-slate-300 mb-1">আপনার নাম</label>
-                                <input type="text" required id="customerName" class="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-900/80 border border-slate-600 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-slate-500 text-sm sm:text-base transition-all" placeholder="আপনার পুরো নাম">
-                            </div>
-                            <div>
-                                <label class="block text-xs sm:text-sm font-medium text-slate-300 mb-1">ক্যানভা ইমেইল অ্যাড্রেস <span class="text-red-400">*</span></label>
-                                <input type="email" required id="customerEmail" class="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-900/80 border border-slate-600 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-slate-500 text-sm sm:text-base transition-all" placeholder="যে ইমেইলে ইনভাইটেশন যাবে">
-                            </div>
-                            <div>
-                                <label class="block text-xs sm:text-sm font-medium text-slate-300 mb-1">যোগাযোগের নাম্বার</label>
-                                <input type="tel" required id="customerPhone" class="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-slate-900/80 border border-slate-600 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-slate-500 text-sm sm:text-base transition-all" placeholder="01XXX-XXXXXX">
-                            </div>
+                        <div class="space-y-4">
+                            <input type="text" required id="customerName" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/80 border border-slate-600 text-white outline-none" placeholder="আপনার পুরো নাম">
+                            <input type="email" required id="customerEmail" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/80 border border-slate-600 text-white outline-none" placeholder="যে ইমেইলে ইনভাইটেশন যাবে">
+                            <input type="tel" required id="customerPhone" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/80 border border-slate-600 text-white outline-none" placeholder="যোগাযোগের নাম্বার">
                         </div>
                         
                         <div class="mt-8">
                             <p class="text-sm font-medium text-slate-300 text-center mb-4">পেমেন্ট মেথড নির্বাচন করুন</p>
-                            
                             <div class="grid grid-cols-2 gap-3 mb-6">
-                                <button type="button" onclick="selectPayment('bkash')" id="btn-bkash" class="bg-slate-900/80 border border-slate-600 hover:border-[#E2136E] text-white py-3 rounded-xl flex flex-col items-center justify-center transition-all">
-                                    <span class="text-[#E2136E] font-bold mb-1">bKash</span>
-                                    <span class="text-xs text-slate-400">Secure Payment</span>
-                                </button>
-                                <button type="button" onclick="selectPayment('nagad')" id="btn-nagad" class="bg-slate-900/80 border border-slate-600 hover:border-[#F58220] text-white py-3 rounded-xl flex flex-col items-center justify-center transition-all">
-                                    <span class="text-[#F58220] font-bold mb-1">Nagad</span>
-                                    <span class="text-xs text-slate-400">Send Money</span>
-                                </button>
+                                <button type="button" onclick="selectPayment('bkash')" id="btn-bkash" class="bg-slate-900/80 border border-slate-600 text-white py-3 rounded-xl">bKash</button>
+                                <button type="button" onclick="selectPayment('nagad')" id="btn-nagad" class="bg-slate-900/80 border border-slate-600 text-white py-3 rounded-xl">Nagad</button>
                             </div>
 
                             <div id="bkashArea" class="hidden bg-[#E2136E]/10 p-5 rounded-xl border border-[#E2136E]/30 mb-6 text-center">
-                                <div class="w-12 h-12 mx-auto bg-[#E2136E] rounded-full flex items-center justify-center mb-3 shadow-lg shadow-pink-500/30">
-                                    <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                    </svg>
-                                </div>
                                 <p class="text-sm text-slate-300">নিরাপদ বিকাশ পেমেন্ট গেটওয়ের মাধ্যমে স্বয়ংক্রিয়ভাবে <strong class="text-white">৳ <span class="paymentAmount">২৬</span></strong> পেমেন্ট করুন।</p>
                             </div>
 
                             <div id="nagadArea" class="hidden bg-[#F58220]/10 p-5 rounded-xl border border-[#F58220]/30 mb-6">
-                                <div class="text-center mb-5">
-                                    <p class="text-sm text-slate-300 mb-2 leading-relaxed">এই নগদ নাম্বারে <strong class="text-white">৳ <span class="paymentAmount">২৬</span></strong> সেন্ড মানি করুন এবং নিচে আপনার ট্রানজেকশন নাম্বারটি/আইডিটি দিন।</p>
-                                    
-                                    <div class="flex items-center justify-center gap-2 my-3">
-                                        <p id="nagadNumber" class="text-2xl font-bold tracking-wider text-[#F58220] bg-slate-900/80 py-2 px-4 rounded-lg border border-[#F58220]/30">01777108879</p>
-                                        <button type="button" onclick="copyNagadNumber()" class="p-2.5 bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-600 transition-colors group relative" title="নাম্বারটি কপি করুন">
-                                            <svg id="copyIcon" class="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                            <svg id="checkIcon" class="w-6 h-6 text-green-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                        </button>
-                                    </div>
-                                    <p class="text-xs font-medium text-slate-400">পার্সোনাল একাউন্ট</p>
+                                <p class="text-center text-sm text-slate-300 mb-2">এই নগদ নাম্বারে <strong class="text-white">৳ <span class="paymentAmount">২৬</span></strong> সেন্ড মানি করুন:</p>
+                                <div class="flex items-center justify-center gap-2 my-3">
+                                    <p id="nagadNumber" class="text-2xl font-bold text-[#F58220]">01777108879</p>
+                                    <button type="button" onclick="copyNagadNumber()" class="p-2.5 bg-slate-800 rounded-lg">📋</button>
                                 </div>
-                                
-                                <div>
-                                    <label class="block text-xs sm:text-sm font-medium text-slate-300 mb-1">TrxID (ট্রানজেকশন আইডি) <span class="text-red-400">*</span></label>
-                                    <input type="text" id="trxId" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-600 text-white focus:outline-none focus:ring-2 focus:ring-[#F58220] focus:border-transparent placeholder-slate-500 text-sm transition-all" placeholder="যেমন: 8N7A6B5C4D">
-                                </div>
+                                <input type="text" id="trxId" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-600 text-white" placeholder="TrxID (ট্রানজেকশন আইডি)">
                             </div>
                             
-                            <button type="submit" id="submitOrderBtn" class="hidden w-full text-white font-bold py-3.5 sm:py-4 px-4 rounded-xl flex items-center justify-center text-sm sm:text-base transition-all transform hover:-translate-y-1 shadow-lg shadow-purple-500/20">
-                            </button>
+                            <button type="submit" id="submitOrderBtn" class="hidden w-full text-white font-bold py-4 rounded-xl shadow-lg transition-transform hover:-translate-y-1"></button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div id="processingOverlay" class="fixed inset-0 z-[110] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md transition-opacity duration-300 opacity-0">
-        <div class="flex flex-col items-center transform scale-95 transition-transform duration-300" id="processingBox">
-            <div class="premium-spinner mb-6 shadow-[0_0_30px_rgba(125,42,232,0.5)]"></div>
-            <h3 class="text-2xl font-bold text-white mb-2 tracking-wide">প্রসেসিং হচ্ছে...</h3>
-            <p class="text-slate-400 text-sm font-medium animate-pulse">আপনার তথ্য সুরক্ষিতভাবে যাচাই করা হচ্ছে</p>
+        <footer class="py-6 bg-slate-950 border-t border-slate-900 text-center flex justify-center items-center gap-2">
+            <p class="text-sm text-slate-500">&copy; 2024 Canva Pro Offer.</p>
+            <button onclick="showAdminLogin()" class="text-slate-700 hover:text-slate-400 text-xs p-1" title="Admin Login">🔒</button>
+        </footer>
+    </div>
+
+    <div id="adminLoginView" class="hidden h-screen flex flex-col items-center justify-center px-4 bg-slate-950">
+        <div class="glass-card p-8 rounded-3xl w-full max-w-sm border border-slate-700 shadow-2xl text-center">
+            <h2 class="text-2xl font-bold text-white mb-2">অ্যাডমিন লগইন</h2>
+            <p class="text-slate-400 text-sm mb-6">শুধুমাত্র অনুমোদিত ব্যক্তিদের জন্য</p>
+            <form id="adminLoginForm" class="space-y-4">
+                <input type="email" id="adminEmail" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-600 text-white outline-none" placeholder="Email">
+                <input type="password" id="adminPass" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-600 text-white outline-none" placeholder="Password">
+                <button type="submit" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all">লগইন করুন</button>
+            </form>
+            <button onclick="hideAdminLogin()" class="mt-4 text-sm text-slate-500 hover:text-white">ওয়েবসাইটে ফিরে যান</button>
         </div>
+    </div>
+
+    <div id="adminDashboardView" class="hidden flex h-screen overflow-hidden bg-[#0B1120]">
+        <aside class="w-64 bg-slate-900 border-r border-slate-800 flex-col hidden md:flex z-20 shadow-2xl">
+            <div class="h-20 flex items-center justify-center border-b border-slate-800/50">
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Admin Panel</h1>
+            </div>
+            <nav class="flex-1 px-4 py-6 space-y-2">
+                <button onclick="switchAdminTab('orders')" id="tab-orders" class="w-full flex items-center px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl font-semibold border border-blue-500/30">📊 অর্ডার লিস্ট</button>
+                <button onclick="switchAdminTab('settings')" id="tab-settings" class="w-full flex items-center px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl font-medium">⚙️ সেটিংস</button>
+            </nav>
+            <div class="p-6 border-t border-slate-800/50">
+                <button id="logoutBtn" class="w-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white py-2 rounded-lg font-bold transition-all">লগআউট</button>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+            <header class="h-20 flex items-center justify-between px-6 glass-card z-10">
+                <h2 id="adminPageTitle" class="text-xl font-bold text-white">অর্ডার ম্যানেজমেন্ট</h2>
+                <button id="mobileLogoutBtn" class="md:hidden bg-red-500/20 text-red-400 px-3 py-1 rounded">Logout</button>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-4 sm:p-6 z-10">
+                <div id="adminOrdersView" class="block space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="glass-card p-6 rounded-2xl"><p class="text-slate-400 text-sm">মোট অর্ডার</p><h3 id="statTotal" class="text-3xl font-bold text-white">0</h3></div>
+                        <div class="glass-card p-6 rounded-2xl"><p class="text-slate-400 text-sm">পেন্ডিং</p><h3 id="statPending" class="text-3xl font-bold text-yellow-400">0</h3></div>
+                        <div class="glass-card p-6 rounded-2xl"><p class="text-slate-400 text-sm">কনফার্মড</p><h3 id="statConfirmed" class="text-3xl font-bold text-green-400">0</h3></div>
+                    </div>
+                    <div class="glass-card rounded-2xl overflow-hidden">
+                        <div class="p-4 bg-slate-800/50 border-b border-slate-700"><h3 class="font-bold text-white">কাস্টমার রিকোয়েস্ট</h3></div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm whitespace-nowrap">
+                                <thead class="bg-slate-900/80 text-slate-400 uppercase text-xs">
+                                    <tr><th class="px-6 py-4">কাস্টমার</th><th class="px-6 py-4">পেমেন্ট</th><th class="px-6 py-4">TrxID / Status</th><th class="px-6 py-4 text-right">অ্যাকশন</th></tr>
+                                </thead>
+                                <tbody id="ordersTableBody" class="divide-y divide-slate-800/50"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="adminSettingsView" class="hidden max-w-2xl mx-auto glass-card rounded-3xl p-8">
+                    <h3 class="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-4">ওয়েবসাইট সেটিংস</h3>
+                    <form id="settingsForm" class="space-y-5">
+                        <label class="block text-slate-300 text-sm">প্রধান শিরোনাম</label>
+                        <textarea id="set_title" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none"></textarea>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><label class="block text-slate-300 text-sm">মূল্য (৳)</label><input type="number" id="set_price" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none"></div>
+                            <div><label class="block text-slate-300 text-sm">মেয়াদ</label><input type="text" id="set_duration" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none"></div>
+                        </div>
+                        <label class="block text-slate-300 text-sm">নগদ নাম্বার</label>
+                        <input type="text" id="set_nagad" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none">
+                        
+                        <button type="submit" id="saveSettingsBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl mt-4">আপডেট সেভ করুন</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="processingOverlay" class="fixed inset-0 z-[110] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md opacity-0 transition-opacity">
+        <div class="flex flex-col items-center"><div class="premium-spinner mb-6"></div><h3 class="text-xl font-bold text-white mb-2">প্রসেসিং হচ্ছে...</h3></div>
     </div>
 
     <div id="customAlertModal" class="fixed inset-0 z-[120] hidden items-center justify-center">
-        <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity" onclick="closeCustomAlert()"></div>
-        
-        <div id="customAlertBox" class="relative z-10 w-full max-w-sm transform overflow-hidden rounded-3xl bg-slate-800 p-8 text-center shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-slate-700 mx-4 transition-all duration-300 scale-95 opacity-0">
-            <div id="customAlertIcon" class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20 text-green-400">
-                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            
-            <h3 id="customAlertTitle" class="mb-3 text-2xl font-bold text-white">ধন্যবাদ!</h3>
-            <p id="customAlertMessage" class="mb-8 text-sm text-slate-300 leading-relaxed font-medium">আপনার মেসেজ এখানে...</p>
-            
-            <button onclick="closeCustomAlert()" class="w-full rounded-xl canva-gradient px-4 py-3.5 text-base font-bold text-white shadow-lg shadow-purple-500/30 transition-transform transform hover:-translate-y-1">
-                ঠিক আছে
-            </button>
+        <div class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" onclick="closeCustomAlert()"></div>
+        <div id="customAlertBox" class="relative z-10 w-full max-w-sm transform rounded-3xl bg-slate-800 p-8 text-center border border-slate-700 scale-95 opacity-0 transition-all">
+            <h3 id="customAlertTitle" class="mb-3 text-2xl font-bold text-white"></h3>
+            <p id="customAlertMessage" class="mb-8 text-sm text-slate-300"></p>
+            <button onclick="closeCustomAlert()" class="w-full rounded-xl canva-gradient py-3.5 font-bold text-white">ঠিক আছে</button>
         </div>
     </div>
 
-    <footer class="py-6 bg-slate-950 border-t border-slate-900 text-center">
-        <p class="text-sm text-slate-500">&copy; 2024 Canva Pro Offer. All rights reserved.</p>
-    </footer>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, doc, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBgV-LNGsIp25JQENNADZqBGJv-jaiS_qw",
@@ -245,184 +231,226 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const auth = getAuth(app);
 
+        // ================= AUTHENTICATION LOGIC =================
+        const publicView = document.getElementById('publicWebsiteView');
+        const loginView = document.getElementById('adminLoginView');
+        const dashboardView = document.getElementById('adminDashboardView');
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Admin is Logged In
+                loginView.classList.add('hidden');
+                publicView.classList.add('hidden');
+                dashboardView.classList.remove('hidden');
+                dashboardView.classList.add('flex');
+                loadAdminData();
+            } else {
+                // Not Logged In
+                dashboardView.classList.add('hidden');
+                dashboardView.classList.remove('flex');
+                // Don't show public automatically if they are on login screen
+                if(loginView.classList.contains('hidden')) {
+                    publicView.classList.remove('hidden');
+                }
+            }
+        });
+
+        document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            btn.innerText = "লগইন হচ্ছে...";
+            signInWithEmailAndPassword(auth, document.getElementById('adminEmail').value, document.getElementById('adminPass').value)
+            .then(() => { btn.innerText = "লগইন করুন"; })
+            .catch(err => { alert("ইমেইল বা পাসওয়ার্ড ভুল!"); btn.innerText = "লগইন করুন"; });
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
+        document.getElementById('mobileLogoutBtn').addEventListener('click', () => signOut(auth));
+
+        // ================= LOAD LIVE SETTINGS (PUBLIC VIEW) =================
+        async function loadPublicSettings() {
+            try {
+                const docSnap = await getDoc(doc(db, "settings", "site_info"));
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    if(data.title) document.getElementById('display_title').innerHTML = data.title;
+                    if(data.price) {
+                        document.getElementById('display_price').innerText = `৳ ${data.price}`;
+                        document.querySelectorAll('.paymentAmount').forEach(el => el.innerText = data.price);
+                    }
+                    if(data.duration) document.getElementById('display_duration').innerText = data.duration;
+                    if(data.nagadNumber) document.getElementById('nagadNumber').innerText = data.nagadNumber;
+                    
+                    // Populate Admin Settings fields
+                    document.getElementById('set_title').value = data.title || '';
+                    document.getElementById('set_price').value = data.price || '';
+                    document.getElementById('set_duration').value = data.duration || '';
+                    document.getElementById('set_nagad').value = data.nagadNumber || '';
+                }
+            } catch(e) {}
+        }
+        loadPublicSettings();
+
+        // ================= PUBLIC FORM SUBMISSION =================
         document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Show Processing Overlay
-            const processingOverlay = document.getElementById('processingOverlay');
-            const processingBox = document.getElementById('processingBox');
-            
-            processingOverlay.classList.remove('hidden');
-            processingOverlay.classList.add('flex');
-            
-            // Trigger Fade-in Animation
-            setTimeout(() => {
-                processingOverlay.classList.remove('opacity-0');
-                processingBox.classList.remove('scale-95');
-            }, 10);
+            const overlay = document.getElementById('processingOverlay');
+            overlay.classList.remove('hidden'); overlay.classList.add('flex');
+            setTimeout(() => overlay.classList.remove('opacity-0'), 10);
 
             try {
-                const name = document.getElementById('customerName').value;
-                const email = document.getElementById('customerEmail').value;
-                const phone = document.getElementById('customerPhone').value;
-                const trxId = document.getElementById('trxId').value;
-                
-                if(window.selectedMethod === 'bkash') {
-                    await addDoc(collection(db, "orders"), {
-                        name: name, email: email, phone: phone,
-                        paymentMethod: "bKash (Merchant)", trxId: "N/A", amount: 26,
-                        status: "Pending Payment", timestamp: serverTimestamp()
-                    });
-                } else if (window.selectedMethod === 'nagad') {
-                    await addDoc(collection(db, "orders"), {
-                        name: name, email: email, phone: phone,
-                        paymentMethod: "Nagad", trxId: trxId, amount: 26,
-                        status: "Pending Verification", timestamp: serverTimestamp()
-                    });
-                }
+                const amount = document.getElementById('display_price').innerText.replace('৳ ', '');
+                await addDoc(collection(db, "orders"), {
+                    name: document.getElementById('customerName').value,
+                    email: document.getElementById('customerEmail').value,
+                    phone: document.getElementById('customerPhone').value,
+                    trxId: document.getElementById('trxId').value || "N/A",
+                    paymentMethod: window.selectedMethod,
+                    amount: amount,
+                    status: "Pending",
+                    timestamp: serverTimestamp()
+                });
 
-                // Artificial delay (2 seconds) to show processing animation
                 setTimeout(() => {
-                    // Hide Processing Overlay
-                    processingOverlay.classList.add('opacity-0');
-                    processingBox.classList.add('scale-95');
-                    
+                    overlay.classList.add('opacity-0');
                     setTimeout(() => {
-                        processingOverlay.classList.add('hidden');
-                        processingOverlay.classList.remove('flex');
-                        
-                        // Show Success Alert
-                        if(window.selectedMethod === 'bkash') {
-                            showCustomAlert("অপেক্ষা করুন", "আপনার তথ্য সেভ হয়েছে। আপনাকে এখন নিরাপদ বিকাশ পেমেন্ট গেটওয়েতে নিয়ে যাওয়া হবে... (ভবিষ্যতে API যুক্ত হবে)", true);
-                        } else if (window.selectedMethod === 'nagad') {
-                            showCustomAlert("ধন্যবাদ!", "আপনার অর্ডারটি ম্যানুয়াল যাচাইয়ের জন্য সাবমিট হয়েছে।<br>আমরা দ্রুত আপনার ইমেইলে ইনভাইটেশন পাঠিয়ে দেব।", true);
-                        }
-
-                        // Form UI Reset
+                        overlay.classList.add('hidden'); overlay.classList.remove('flex');
+                        window.showCustomAlert("ধন্যবাদ!", "আপনার অর্ডার সফলভাবে সাবমিট হয়েছে।");
                         document.getElementById('checkoutForm').reset();
                         document.getElementById('bkashArea').classList.add('hidden');
                         document.getElementById('nagadArea').classList.add('hidden');
                         document.getElementById('submitOrderBtn').classList.add('hidden');
-                        document.getElementById('btn-bkash').classList.remove('border-[#E2136E]', 'bg-[#E2136E]/10');
-                        document.getElementById('btn-nagad').classList.remove('border-[#F58220]', 'bg-[#F58220]/10');
                         window.selectedMethod = '';
-
-                    }, 300); // Wait for fade out
-                }, 2000); // 2 seconds artificial delay
-
-            } catch(error) {
-                console.error("Error adding document: ", error);
-                
-                setTimeout(() => {
-                    processingOverlay.classList.add('opacity-0');
-                    setTimeout(() => {
-                        processingOverlay.classList.add('hidden');
-                        processingOverlay.classList.remove('flex');
-                        // Show Error Alert
-                        showCustomAlert("দুঃখিত!", "কোনো একটি সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।", false);
                     }, 300);
-                }, 1000);
+                }, 2000);
+            } catch(error) {
+                overlay.classList.add('hidden');
+                window.showCustomAlert("দুঃখিত!", "সমস্যা হয়েছে। আবার চেষ্টা করুন।", false);
             }
+        });
+
+        // ================= ADMIN LOGIC (REAL-TIME) =================
+        function loadAdminData() {
+            // Fetch Orders
+            onSnapshot(query(collection(db, "orders"), orderBy("timestamp", "desc")), (snapshot) => {
+                const tbody = document.getElementById('ordersTableBody');
+                tbody.innerHTML = '';
+                let total = 0, pending = 0, confirmed = 0;
+
+                if(snapshot.empty) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-6 text-center text-slate-500">কোনো অর্ডার নেই।</td></tr>`;
+                    return;
+                }
+
+                snapshot.forEach((document) => {
+                    const order = document.data();
+                    total++;
+                    const isPending = order.status.includes('Pending');
+                    if(isPending) pending++; else confirmed++;
+
+                    const badge = isPending ? `<span class="text-yellow-400 bg-yellow-400/10 px-2 py-1 rounded text-xs">Pending</span>` : `<span class="text-green-400 bg-green-400/10 px-2 py-1 rounded text-xs">Confirmed</span>`;
+                    const btnHTML = isPending ? `<button onclick="confirmOrder('${document.id}')" class="text-blue-400 hover:text-blue-300 border border-blue-500/30 px-3 py-1 rounded">Confirm</button>` : `<span class="text-slate-500 text-sm">Done</span>`;
+
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-slate-800/40 border-t border-slate-700/50">
+                            <td class="px-6 py-4"><p class="font-bold text-white">${order.name}</p><p class="text-xs text-slate-400">${order.email} | ${order.phone}</p></td>
+                            <td class="px-6 py-4 font-bold text-sm ${order.paymentMethod.includes('bKash')?'text-[#E2136E]':'text-[#F58220]'}">${order.paymentMethod}</td>
+                            <td class="px-6 py-4"><p class="font-mono text-xs text-slate-300 mb-1">${order.trxId}</p>${badge}</td>
+                            <td class="px-6 py-4 text-right">${btnHTML}</td>
+                        </tr>
+                    `;
+                });
+                document.getElementById('statTotal').innerText = total;
+                document.getElementById('statPending').innerText = pending;
+                document.getElementById('statConfirmed').innerText = confirmed;
+            });
+        }
+
+        // Global Confirm Function
+        window.confirmOrder = async function(id) {
+            if(confirm("অর্ডারটি কনফার্ম করবেন?")) {
+                await updateDoc(doc(db, "orders", id), { status: "Confirmed" });
+                alert("কনফার্ম হয়েছে!");
+            }
+        }
+
+        // Save Admin Settings
+        document.getElementById('settingsForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('saveSettingsBtn');
+            btn.innerText = "সেভ হচ্ছে...";
+            try {
+                await setDoc(doc(db, "settings", "site_info"), {
+                    title: document.getElementById('set_title').value,
+                    price: document.getElementById('set_price').value,
+                    duration: document.getElementById('set_duration').value,
+                    nagadNumber: document.getElementById('set_nagad').value
+                });
+                alert("আপডেট সেভ হয়েছে! মূল ওয়েবসাইটে এটি পরিবর্তন হয়ে গেছে।");
+                loadPublicSettings(); // Reload locally
+            } catch(e) { alert("সমস্যা হয়েছে!"); }
+            btn.innerText = "আপডেট সেভ করুন";
         });
     </script>
 
     <script>
         window.selectedMethod = '';
+        
+        // Navigation Functions
+        function showAdminLogin() {
+            document.getElementById('publicWebsiteView').classList.add('hidden');
+            document.getElementById('adminLoginView').classList.remove('hidden');
+        }
+        function hideAdminLogin() {
+            document.getElementById('adminLoginView').classList.add('hidden');
+            document.getElementById('publicWebsiteView').classList.remove('hidden');
+        }
 
-        function showCustomAlert(title, message, isSuccess = true) {
-            const modal = document.getElementById('customAlertModal');
-            const box = document.getElementById('customAlertBox');
-            const titleEl = document.getElementById('customAlertTitle');
-            const msgEl = document.getElementById('customAlertMessage');
-            const iconDiv = document.getElementById('customAlertIcon');
-
-            titleEl.innerText = title;
-            msgEl.innerHTML = message;
-
-            if(isSuccess) {
-                iconDiv.className = "mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20 text-green-400";
-                iconDiv.innerHTML = '<svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+        // Admin Tab Switcher
+        function switchAdminTab(tab) {
+            const tOrders = document.getElementById('tab-orders');
+            const tSettings = document.getElementById('tab-settings');
+            if(tab === 'orders') {
+                document.getElementById('adminOrdersView').classList.remove('hidden');
+                document.getElementById('adminSettingsView').classList.add('hidden');
+                document.getElementById('adminPageTitle').innerText = "অর্ডার ম্যানেজমেন্ট";
+                tOrders.className = "w-full flex items-center px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl font-semibold border border-blue-500/30";
+                tSettings.className = "w-full flex items-center px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl font-medium";
             } else {
-                iconDiv.className = "mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-red-500/20 text-red-400";
-                iconDiv.innerHTML = '<svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+                document.getElementById('adminOrdersView').classList.add('hidden');
+                document.getElementById('adminSettingsView').classList.remove('hidden');
+                document.getElementById('adminPageTitle').innerText = "ওয়েবসাইট সেটিংস";
+                tSettings.className = "w-full flex items-center px-4 py-3 bg-blue-600/20 text-blue-400 rounded-xl font-semibold border border-blue-500/30";
+                tOrders.className = "w-full flex items-center px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl font-medium";
             }
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            
-            setTimeout(() => {
-                box.classList.remove('scale-95', 'opacity-0');
-                box.classList.add('scale-100', 'opacity-100');
-            }, 10);
         }
 
-        function closeCustomAlert() {
-            const modal = document.getElementById('customAlertModal');
-            const box = document.getElementById('customAlertBox');
-            
-            box.classList.remove('scale-100', 'opacity-100');
-            box.classList.add('scale-95', 'opacity-0');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }, 300);
-        }
-
-        function scrollToForm() {
-            document.getElementById('orderSection').scrollIntoView({ behavior: 'smooth' });
-        }
-
+        // Public Logic
         function selectPayment(method) {
             window.selectedMethod = method;
-            const submitOrderBtn = document.getElementById('submitOrderBtn');
-            const btnBkash = document.getElementById('btn-bkash');
-            const btnNagad = document.getElementById('btn-nagad');
-            const bkashArea = document.getElementById('bkashArea');
-            const nagadArea = document.getElementById('nagadArea');
-            const trxIdInput = document.getElementById('trxId');
-
-            submitOrderBtn.classList.remove('hidden');
-            btnBkash.classList.remove('border-[#E2136E]', 'bg-[#E2136E]/10');
-            btnNagad.classList.remove('border-[#F58220]', 'bg-[#F58220]/10');
-            bkashArea.classList.add('hidden');
-            nagadArea.classList.add('hidden');
-
-            if(method === 'bkash') {
-                btnBkash.classList.add('border-[#E2136E]', 'bg-[#E2136E]/10');
-                bkashArea.classList.remove('hidden');
-                trxIdInput.removeAttribute('required');
-                
-                submitOrderBtn.className = "w-full bg-[#E2136E] hover:bg-[#c91162] text-white font-bold py-3.5 sm:py-4 px-4 rounded-xl flex items-center justify-center text-sm sm:text-base transition-transform transform hover:-translate-y-1 shadow-lg shadow-pink-500/20";
-                submitOrderBtn.innerText = "বিকাশ দিয়ে পেমেন্ট করুন";
-
-            } else if (method === 'nagad') {
-                btnNagad.classList.add('border-[#F58220]', 'bg-[#F58220]/10');
-                nagadArea.classList.remove('hidden');
-                trxIdInput.setAttribute('required', 'true');
-                
-                submitOrderBtn.className = "w-full bg-[#F58220] hover:bg-[#e0751a] text-white font-bold py-3.5 sm:py-4 px-4 rounded-xl flex items-center justify-center text-sm sm:text-base transition-transform transform hover:-translate-y-1 shadow-lg shadow-orange-500/20";
-                submitOrderBtn.innerText = "অর্ডার কনফার্ম করুন";
-            }
+            const btn = document.getElementById('submitOrderBtn');
+            btn.classList.remove('hidden');
+            btn.className = method === 'bkash' ? "w-full bg-[#E2136E] font-bold py-4 rounded-xl mt-4 text-white" : "w-full bg-[#F58220] font-bold py-4 rounded-xl mt-4 text-white";
+            btn.innerText = method === 'bkash' ? "বিকাশ মার্চেন্ট পেমেন্ট" : "অর্ডার কনফার্ম করুন";
+            document.getElementById('nagadArea').classList.toggle('hidden', method !== 'nagad');
+            document.getElementById('bkashArea').classList.toggle('hidden', method !== 'bkash');
         }
 
-        function copyNagadNumber() {
-            const number = document.getElementById('nagadNumber').innerText;
-            navigator.clipboard.writeText(number).then(() => {
-                const copyIcon = document.getElementById('copyIcon');
-                const checkIcon = document.getElementById('checkIcon');
-                
-                copyIcon.classList.add('hidden');
-                checkIcon.classList.remove('hidden');
-                
-                setTimeout(() => {
-                    copyIcon.classList.remove('hidden');
-                    checkIcon.classList.add('hidden');
-                }, 2000);
-            }).catch(err => {
-                showCustomAlert("দুঃখিত!", "নাম্বারটি কপি করা সম্ভব হয়নি।", false);
-            });
+        function scrollToForm() { document.getElementById('orderSection').scrollIntoView({ behavior: 'smooth' }); }
+        function copyNagadNumber() { navigator.clipboard.writeText(document.getElementById('nagadNumber').innerText); alert("নাম্বার কপি হয়েছে!"); }
+
+        window.showCustomAlert = function(title, message, isSuccess=true) {
+            document.getElementById('customAlertTitle').innerText = title;
+            document.getElementById('customAlertMessage').innerHTML = message;
+            const modal = document.getElementById('customAlertModal');
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+            setTimeout(() => { document.getElementById('customAlertBox').classList.remove('scale-95', 'opacity-0'); }, 10);
+        }
+        function closeCustomAlert() {
+            document.getElementById('customAlertBox').classList.add('scale-95', 'opacity-0');
+            setTimeout(() => document.getElementById('customAlertModal').classList.add('hidden'), 300);
         }
     </script>
 </body>
