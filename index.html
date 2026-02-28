@@ -65,7 +65,7 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
                 <h2 class="editable-text text-2xl sm:text-3xl font-bold text-center mb-8 text-white" data-key="feature_title" id="display_feature_title">কেন এই অফারটি মিস করবেন না?</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    <div class="bg-[#1f2937] p-6 rounded-2xl border border-slate-700"><div class="w-12 h-12 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-2xl mb-4">🔒</div><h3 class="text-lg font-bold mb-2 text-white">নিজস্ব মেইলে অ্যাক্সেস</h3><p class="text-sm text-slate-400">পাসওয়ার্ড শেয়ারের প্রয়োজন নেই। আপনার নিজের ইমেইলেই অফিশিয়াল ইনভাইটেশন পাঠানো হবে。</p></div>
+                    <div class="bg-[#1f2937] p-6 rounded-2xl border border-slate-700"><div class="w-12 h-12 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-2xl mb-4">🔒</div><h3 class="text-lg font-bold mb-2 text-white">নিজস্ব মেইলে অ্যাক্সেস</h3><p class="text-sm text-slate-400">পাসওয়ার্ড শেয়ারের প্রয়োজন নেই। আপনার নিজের ইমেইলেই অফিশিয়াল ইনভাইটেশন পাঠানো হবে।</p></div>
                     <div class="bg-[#1f2937] p-6 rounded-2xl border border-slate-700"><div class="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-2xl mb-4">📅</div><h3 class="text-lg font-bold mb-2 text-white">পুরো ৩ বছরের মেয়াদ</h3><p class="text-sm text-slate-400">১-২ মাসের কোনো ঝামেলা নেই! দীর্ঘমেয়াদে নিশ্চিন্তে ক্যানভা প্রো ব্যবহার করার সুযোগ।</p></div>
                     <div class="bg-[#1f2937] p-6 rounded-2xl border border-slate-700"><div class="w-12 h-12 bg-pink-500/10 text-pink-400 rounded-xl flex items-center justify-center text-2xl mb-4">🛡️</div><h3 class="text-lg font-bold mb-2 text-white">১০০% গ্যারান্টি</h3><p class="text-sm text-slate-400">সাথে থাকছে ১ বছরের রিপ্লেসমেন্ট ওয়ারেন্টি। যেকোনো সমস্যায় আমরা আছি আপনার পাশে।</p></div>
                 </div>
@@ -95,12 +95,14 @@
                             </div>
 
                             <div id="nagadArea" class="hidden mb-6 bg-[#F58220]/10 p-4 rounded-xl border border-[#F58220]/20">
-                                <p class="text-center text-sm text-slate-300 mb-2">এই নাম্বারে ২৬ টাকা সেন্ড মানি করুন এবং আপনার ট্রানজেকশন আইডি বা নাম্বার দিন</p>
+                                <p class="text-center text-sm text-slate-300 mb-2">এই নাম্বারে ২৬ টাকা সেন্ড মানি করুন এবং আপনার ট্রানজেকশন আইডি বা নাম্বার দিন:</p>
                                 <div class="flex items-center justify-center gap-3 my-3">
                                     <p class="editable-text text-xl font-bold text-[#F58220] bg-[#111827] px-4 py-2 rounded-lg border border-[#374151]" data-key="nagadNumber" id="display_nagadNumber">01777108879</p>
-                                    <button type="button" onclick="copyNagadNumber()" id="copyBtn" class="bg-[#111827] border border-[#374151] p-2.5 rounded-lg hover:bg-slate-700 text-slate-300 transition-colors">📋</button>
+                                    <button type="button" onclick="copyNagadNumber()" class="bg-[#111827] border border-[#374151] w-11 h-11 rounded-lg hover:bg-slate-700 text-slate-300 transition-colors flex items-center justify-center">
+                                        <span id="nagadCopyIcon">📋</span>
+                                    </button>
                                 </div>
-                                <input type="text" id="trxId" class="form-input mt-3" placeholder="TrxID (ট্রানজেকশন আইডি)">
+                                <input type="text" id="trxId" class="form-input mt-3" placeholder="TrxID (ট্রানজেকশন আইডি) বা নাম্বার">
                             </div>
                             <button type="submit" id="submitOrderBtn" class="hidden w-full text-white font-bold py-3.5 rounded-xl shadow-lg transition-transform hover:-translate-y-1"></button>
                         </div>
@@ -181,8 +183,8 @@
                     <table class="w-full text-left table-fixed">
                         <thead class="bg-[#111827] text-slate-400 text-[10px] sm:text-xs border-b border-slate-700">
                             <tr>
-                                <th class="w-[45%] px-3 py-3 sm:px-4">নাম ও তথ্য</th>
-                                <th class="w-[30%] px-1 py-3 text-center">TrxID / পেমেন্ট</th>
+                                <th class="w-[45%] px-3 py-3 sm:px-4">কাস্টমার (ক্লিক করুন)</th>
+                                <th class="w-[30%] px-1 py-3 text-center">স্ট্যাটাস / TrxID</th>
                                 <th class="w-[30%] px-2 py-3 text-right pr-3">অ্যাকশন</th>
                             </tr>
                         </thead>
@@ -336,7 +338,6 @@
                 if(data.duration) document.getElementById('display_duration').innerText = data.duration;
                 if(data.nagadNumber) {
                     document.getElementById('display_nagadNumber').innerText = data.nagadNumber;
-                    document.getElementById('nagadNumber').innerText = data.nagadNumber;
                 }
             }
         });
@@ -398,38 +399,24 @@
                     else if (order.status === 'Confirmed') { stats.confirmed.c++; stats.confirmed.a += amt; }
                     else if (order.status === 'Rejected') { stats.rejected.c++; stats.rejected.a += amt; }
 
-                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold mt-1 inline-block">⏳ Pending</span>`;
-                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold mt-1 inline-block">✅ Confirmed</span>`;
-                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold mt-1 inline-block">❌ Rejected</span>`;
+                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-2 py-1 rounded text-xs font-bold border border-yellow-500/20">Pending</span>`;
+                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-2 py-1 rounded text-xs font-bold border border-green-500/20">Confirmed</span>`;
+                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs font-bold border border-red-500/20">Rejected</span>`;
 
                     const payColor = order.paymentMethod.includes('bKash') ? 'text-[#E2136E]' : 'text-[#F58220]';
 
-                    let actionBtns = '';
-                    if(isPending) {
-                        actionBtns = `
-                            <div class="flex gap-1.5 justify-end">
-                                <button onclick="event.stopPropagation(); handleQuickAction('Confirmed', '${id}')" class="bg-green-600/20 text-green-400 hover:bg-green-600 hover:text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold transition-all border border-green-500/30">✅</button>
-                                <button onclick="event.stopPropagation(); handleQuickAction('Rejected', '${id}')" class="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs font-bold transition-all border border-red-500/30">❌</button>
-                            </div>
-                        `;
-                    } else {
-                        let stText = order.status === 'Confirmed' ? '<span class="text-green-500 font-bold text-[10px] sm:text-xs">✅ কনফার্মড</span>' : '<span class="text-red-500 font-bold text-[10px] sm:text-xs">❌ রিজেক্টেড</span>';
-                        actionBtns = `<span class="text-[10px] sm:text-xs text-slate-500 font-bold">${stText}</span>`;
-                    }
-
                     const tr = `
-                        <tr class="hover:bg-[#2d3748] transition-colors cursor-pointer group border-t border-slate-800" onclick="viewCustomerDetails('${id}')">
-                            <td class="w-[45%] px-3 py-3 sm:px-4 sm:py-4 border-r border-slate-800/50">
-                                <p class="text-white font-semibold text-[11px] sm:text-sm truncate w-32 sm:w-auto group-hover:text-blue-400 transition-colors">${order.name}</p>
-                                <p class="text-[9px] sm:text-xs text-slate-400 truncate">${order.phone}</p>
-                                <span class="font-bold text-[9px] sm:text-xs ${payColor}">${order.paymentMethod.replace(' (Merchant)', '')}</span>
+                        <tr class="hover:bg-[#2d3748] border-t border-slate-800/50 cursor-pointer" onclick="viewCustomerDetails('${id}')">
+                            <td class="p-2 sm:px-4 sm:py-3 border-r border-slate-800/50">
+                                <p class="text-white font-bold text-[11px] sm:text-sm truncate w-24 sm:w-48">${order.name}</p>
+                                <p class="text-[9px] sm:text-xs text-slate-400 mt-0.5">${order.phone}</p>
                             </td>
-                            <td class="w-[30%] px-1 py-3 sm:px-4 sm:py-4 border-r border-slate-800/50 text-center">
+                            <td class="p-2 sm:px-4 sm:py-3 border-r border-slate-800/50 text-center">
+                                <p class="font-bold text-[10px] sm:text-xs ${payColor} mb-0.5">${order.paymentMethod.replace(' (Merchant)', '')}</p>
                                 <p class="font-mono text-[9px] sm:text-xs text-slate-300 truncate w-16 sm:w-auto mx-auto">${order.trxId}</p>
-                                ${sBadge}
                             </td>
-                            <td class="w-[30%] px-2 py-3 sm:px-4 sm:py-4 text-right pr-4">
-                                ${actionBtns}
+                            <td class="p-2 sm:px-4 sm:py-3 text-right align-middle pr-3">
+                                ${sBadge}
                             </td>
                         </tr>
                     `;
@@ -447,56 +434,42 @@
         }
 
         window.handleQuickAction = async function(action, id, isFromModal = false) {
+            if(action === 'Update') {
+                window.showProcessing("আপডেট হচ্ছে...");
+                setTimeout(async () => {
+                    await updateDoc(doc(db, "orders", id), {
+                        name: document.getElementById('detName').value,
+                        email: document.getElementById('detEmail').value,
+                        phone: document.getElementById('detPhone').value,
+                        amount: Number(document.getElementById('detAmount').value),
+                        trxId: document.getElementById('detTrxId').value
+                    });
+                    window.hideProcessing(() => { if(isFromModal) window.closeDetailsModal(); });
+                }, 500);
+                return;
+            }
+
             if(action === 'Delete') {
-                if(isFromModal) window.closeDetailsModal();
                 window.showProcessing("ডিলিট হচ্ছে...");
                 setTimeout(async () => {
                     await deleteDoc(doc(db, "orders", id));
-                    window.hideProcessing(() => window.showCustomAlert("সফল!", "ডিলিট করা হয়েছে।"));
-                }, 800);
+                    window.hideProcessing(() => { if(isFromModal) window.closeDetailsModal(); });
+                }, 500);
                 return;
             }
 
-            if(action === 'Update') {
-                window.showProcessing("তথ্য আপডেট হচ্ছে...");
-                setTimeout(async () => {
-                    try {
-                        await updateDoc(doc(db, "orders", id), {
-                            name: document.getElementById('detName').value,
-                            email: document.getElementById('detEmail').value,
-                            phone: document.getElementById('detPhone').value,
-                            amount: Number(document.getElementById('detAmount').value),
-                            trxId: document.getElementById('detTrxId').value
-                        });
-                        window.hideProcessing(() => {
-                            if(isFromModal) window.closeDetailsModal();
-                            window.showCustomAlert("সফল!", "অর্ডারের তথ্য সেভ হয়েছে।");
-                        });
-                    } catch(e) { window.hideProcessing(() => window.showCustomAlert("ত্রুটি", "সমস্যা হয়েছে।", false)); }
-                }, 800);
-                return;
-            }
-
-            window.showProcessing("স্ট্যাটাস আপডেট হচ্ছে...");
+            window.showProcessing("স্ট্যাটাস আপডেট...");
             setTimeout(async () => {
-                try {
-                    await updateDoc(doc(db, "orders", id), { status: action });
-                    window.hideProcessing(() => {
-                        if(isFromModal) window.closeDetailsModal();
-                        window.showCustomAlert("সফল!", `অর্ডারটি ${action === 'Confirmed' ? 'কনফার্ম' : 'রিজেক্ট'} করা হয়েছে।`);
-                    });
-                } catch(e) { window.hideProcessing(() => window.showCustomAlert("ত্রুটি", "সমস্যা হয়েছে।", false)); }
-            }, 800);
+                await updateDoc(doc(db, "orders", id), { status: action });
+                window.hideProcessing();
+            }, 500);
         }
 
         window.saveInlineEditFirestore = async function(key, newValue) {
-            window.showProcessing("আপডেট হচ্ছে...");
-            try {
-                let updates = {};
-                updates[key] = newValue;
-                await setDoc(doc(db, "settings", "site_info"), updates, { merge: true });
-                window.hideProcessing(() => window.showCustomAlert("সফল!", "ওয়েবসাইটে লেখাটি পরিবর্তন হয়ে গেছে।"));
-            } catch(e) { window.hideProcessing(() => window.showCustomAlert("ত্রুটি", "আপডেট করতে সমস্যা হয়েছে।", false)); }
+            window.showProcessing("সেভ হচ্ছে...");
+            let updates = {}; updates[key] = newValue;
+            await setDoc(doc(db, "settings", "site_info"), updates, { merge: true });
+            window.hideProcessing();
         }
 
     </script>
@@ -513,27 +486,25 @@
             document.getElementById('bkashArea').classList.add('hidden');
 
             if(method === 'bkash') {
-                document.getElementById('btn-bkash').className = "pay-btn bg-slate-800 border-[#E2136E]";
+                document.getElementById('btn-bkash').classList.add('border-[#E2136E]', 'bg-slate-800');
                 document.getElementById('bkashArea').classList.remove('hidden');
-                btn.className = "w-full bg-[#E2136E] text-white font-bold py-3.5 rounded-xl shadow-lg mt-2 transition-transform hover:-translate-y-1";
-                btn.innerText = "বিকাশ দিয়ে পেমেন্ট করুন";
+                btn.className = "w-full bg-[#E2136E] text-white font-bold py-3 rounded-xl mt-2";
+                btn.innerText = "বিকাশ পেমেন্ট";
             } else {
-                document.getElementById('btn-nagad').className = "pay-btn bg-slate-800 border-[#F58220]";
+                document.getElementById('btn-nagad').classList.add('border-[#F58220]', 'bg-slate-800');
                 document.getElementById('nagadArea').classList.remove('hidden');
-                btn.className = "w-full bg-[#F58220] text-white font-bold py-3.5 rounded-xl shadow-lg mt-2 transition-transform hover:-translate-y-1";
+                btn.className = "w-full bg-[#F58220] text-white font-bold py-3 rounded-xl mt-2";
                 btn.innerText = "অর্ডার কনফার্ম করুন";
             }
         }
         function scrollToForm() { document.getElementById('orderSection').scrollIntoView({ behavior: 'smooth' }); }
         
-        function copyNagadNumber() {
-            const num = document.getElementById('display_nagadNumber').innerText;
-            navigator.clipboard.writeText(num).then(() => {
-                const icon = document.getElementById('copyIcon');
-                icon.innerHTML = '✅'; 
-                setTimeout(() => {
-                    icon.innerHTML = '📋';
-                }, 2000);
+        function copyNagadNumber() { 
+            const textToCopy = document.getElementById('display_nagadNumber').innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const iconSpan = document.getElementById('nagadCopyIcon');
+                iconSpan.innerText = '✅';
+                setTimeout(() => { iconSpan.innerText = '📋'; }, 2000);
             });
         }
         
@@ -558,24 +529,6 @@
             setTimeout(() => document.getElementById('customAlertModal').classList.add('hidden'), 300);
         }
 
-        let confirmActionCallback = null;
-        window.showCustomConfirm = function(title, message, callback) {
-            document.getElementById('confirmTitle').innerText = title;
-            document.getElementById('confirmMessage').innerText = message;
-            confirmActionCallback = callback;
-            const modal = document.getElementById('customConfirmModal');
-            modal.classList.remove('hidden'); modal.classList.add('flex');
-            setTimeout(() => { document.getElementById('customConfirmBox').classList.remove('scale-95', 'opacity-0'); }, 10);
-        }
-        window.closeCustomConfirm = function() {
-            document.getElementById('customConfirmBox').classList.add('scale-95', 'opacity-0');
-            setTimeout(() => { document.getElementById('customConfirmModal').classList.add('hidden'); confirmActionCallback = null; }, 300);
-        }
-        document.getElementById('confirmActionBtn').addEventListener('click', () => {
-            closeCustomConfirm();
-            if(confirmActionCallback) confirmActionCallback();
-        });
-
         window.viewCustomerDetails = function(id) {
             const data = window.globalOrders[id];
             if(!data) return;
@@ -584,7 +537,7 @@
             document.getElementById('detName').value = data.name;
             document.getElementById('detEmail').value = data.email;
             document.getElementById('detPhone').value = data.phone;
-            document.getElementById('detAmount').value = data.amount;
+            document.getElementById('detAmount').value = data.amount || 26;
             document.getElementById('detMethod').innerText = data.paymentMethod;
             document.getElementById('detTrxId').value = data.trxId || '';
             
@@ -607,11 +560,10 @@
         }
         window.closeDetailsModal = function() {
             document.getElementById('detailsBox').classList.add('scale-95', 'opacity-0');
-            setTimeout(() => document.getElementById('customerDetailsModal').classList.add('hidden'), 300);
+            setTimeout(() => document.getElementById('customerDetailsModal').classList.add('hidden'), 200);
         }
 
         let currentEditKey = '';
-        
         window.enterEditMode = function() {
             document.getElementById('adminDashboardView').classList.add('hidden');
             document.getElementById('publicWebsiteView').classList.remove('hidden');
@@ -619,39 +571,31 @@
             document.body.classList.add('edit-mode');
             window.scrollTo(0,0);
         }
-        
         window.exitEditMode = function() {
             document.getElementById('editModeBanner').classList.add('hidden');
             document.body.classList.remove('edit-mode');
             document.getElementById('publicWebsiteView').classList.add('hidden');
             document.getElementById('adminDashboardView').classList.remove('hidden');
         }
-
         document.querySelectorAll('.editable-text').forEach(el => {
             el.addEventListener('click', function(e) {
                 if(!document.body.classList.contains('edit-mode')) return;
                 e.preventDefault();
-                
                 currentEditKey = this.getAttribute('data-key');
                 document.getElementById('inlineEditTextarea').value = window.currentSettings[currentEditKey] || this.innerText;
-                
                 const modal = document.getElementById('inlineEditModal');
                 modal.classList.remove('hidden'); modal.classList.add('flex');
                 setTimeout(() => { document.getElementById('inlineEditBox').classList.remove('scale-95', 'opacity-0'); }, 10);
             });
         });
-
         window.closeInlineEditModal = function() {
             document.getElementById('inlineEditBox').classList.add('scale-95', 'opacity-0');
-            setTimeout(() => document.getElementById('inlineEditModal').classList.add('hidden'), 300);
+            setTimeout(() => document.getElementById('inlineEditModal').classList.add('hidden'), 200);
         }
-
         window.saveInlineEdit = function() {
             const newValue = document.getElementById('inlineEditTextarea').value;
             closeInlineEditModal();
-            if(window.saveInlineEditFirestore) {
-                window.saveInlineEditFirestore(currentEditKey, newValue);
-            }
+            if(window.saveInlineEditFirestore) window.saveInlineEditFirestore(currentEditKey, newValue);
         }
 
         window.triggerAdminLogin = function() {
