@@ -86,24 +86,31 @@
                         <div class="pt-4">
                             <p class="text-sm font-medium text-slate-300 text-center mb-4">পেমেন্ট মেথড নির্বাচন করুন</p>
                             <div class="grid grid-cols-2 gap-4 mb-6">
-                                <div onclick="selectPayment('bkash')" id="btn-bkash" class="pay-btn bg-[#111827]"><span class="text-[#E2136E] font-bold text-lg mb-1">bKash</span><span class="text-xs text-slate-400">Secure Payment</span></div>
+                                <div onclick="selectPayment('bkash')" id="btn-bkash" class="pay-btn bg-[#111827]"><span class="text-[#E2136E] font-bold text-lg mb-1">bKash</span><span class="text-xs text-slate-400">Send Money</span></div>
                                 <div onclick="selectPayment('nagad')" id="btn-nagad" class="pay-btn bg-[#111827]"><span class="text-[#F58220] font-bold text-lg mb-1">Nagad</span><span class="text-xs text-slate-400">Send Money</span></div>
                             </div>
 
-                            <div id="bkashArea" class="hidden text-center mb-6 bg-[#E2136E]/10 p-4 rounded-xl border border-[#E2136E]/20">
-                                <p class="text-sm text-slate-300">নিরাপদ বিকাশ পেমেন্ট গেটওয়ের মাধ্যমে <strong class="text-white"><span class="paymentAmount">৳ 26</span></strong> পেমেন্ট করুন।</p>
+                            <div id="bkashArea" class="hidden mb-6 bg-[#E2136E]/10 p-4 rounded-xl border border-[#E2136E]/20">
+                                <p class="text-center text-sm text-slate-300 mb-2">এই নাম্বারে <strong class="text-white"><span class="paymentAmount">৳ 26</span></strong> সেন্ড মানি করুন এবং আপনার ট্রানজেকশন আইডি বা নাম্বার দিন:</p>
+                                <div class="flex items-center justify-center gap-3 my-3">
+                                    <p class="editable-text text-xl font-bold text-[#E2136E] bg-[#111827] px-4 py-2 rounded-lg border border-[#374151]" data-key="bkashNumber" id="display_bkashNumber">01720271210</p>
+                                    <button type="button" onclick="copyNumber('display_bkashNumber', 'bkashCopyIcon')" class="bg-[#111827] border border-[#374151] w-11 h-11 flex items-center justify-center rounded-lg hover:bg-slate-700 text-slate-300 transition-colors">
+                                        <span id="bkashCopyIcon">📋</span>
+                                    </button>
+                                </div>
                             </div>
 
                             <div id="nagadArea" class="hidden mb-6 bg-[#F58220]/10 p-4 rounded-xl border border-[#F58220]/20">
-                                <p class="text-center text-sm text-slate-300 mb-2">এই নাম্বারে ২৬ টাকা সেন্ড মানি করুন এবং আপনার ট্রানজেকশন আইডি বা নাম্বার দিন:</p>
+                                <p class="text-center text-sm text-slate-300 mb-2">এই নাম্বারে <strong class="text-white"><span class="paymentAmount">৳ 26</span></strong> সেন্ড মানি করুন এবং আপনার ট্রানজেকশন আইডি বা নাম্বার দিন:</p>
                                 <div class="flex items-center justify-center gap-3 my-3">
                                     <p class="editable-text text-xl font-bold text-[#F58220] bg-[#111827] px-4 py-2 rounded-lg border border-[#374151]" data-key="nagadNumber" id="display_nagadNumber">01777108879</p>
-                                    <button type="button" onclick="copyNagadNumber()" class="bg-[#111827] border border-[#374151] w-11 h-11 rounded-lg hover:bg-slate-700 text-slate-300 transition-colors flex items-center justify-center">
+                                    <button type="button" onclick="copyNumber('display_nagadNumber', 'nagadCopyIcon')" class="bg-[#111827] border border-[#374151] w-11 h-11 flex items-center justify-center rounded-lg hover:bg-slate-700 text-slate-300 transition-colors">
                                         <span id="nagadCopyIcon">📋</span>
                                     </button>
                                 </div>
-                                <input type="text" id="trxId" class="form-input mt-3" placeholder="TrxID (ট্রানজেকশন আইডি) বা নাম্বার">
                             </div>
+                            
+                            <input type="text" id="trxId" class="hidden form-input mt-3 mb-4" placeholder="TrxID (ট্রানজেকশন আইডি) বা নাম্বার">
                             <button type="submit" id="submitOrderBtn" class="hidden w-full text-white font-bold py-3.5 rounded-xl shadow-lg transition-transform hover:-translate-y-1"></button>
                         </div>
                     </form>
@@ -183,8 +190,8 @@
                     <table class="w-full text-left table-fixed">
                         <thead class="bg-[#111827] text-slate-400 text-[10px] sm:text-xs border-b border-slate-700">
                             <tr>
-                                <th class="w-[45%] px-3 py-3 sm:px-4">কাস্টমার (ক্লিক করুন)</th>
-                                <th class="w-[30%] px-1 py-3 text-center">স্ট্যাটাস / TrxID</th>
+                                <th class="w-[45%] px-3 py-3 sm:px-4">নাম ও তথ্য</th>
+                                <th class="w-[30%] px-1 py-3 text-center">TrxID / পেমেন্ট</th>
                                 <th class="w-[30%] px-2 py-3 text-right pr-3">অ্যাকশন</th>
                             </tr>
                         </thead>
@@ -336,8 +343,10 @@
                     document.querySelectorAll('.paymentAmount').forEach(el => el.innerText = data.price);
                 }
                 if(data.duration) document.getElementById('display_duration').innerText = data.duration;
-                if(data.nagadNumber) {
-                    document.getElementById('display_nagadNumber').innerText = data.nagadNumber;
+                if(data.nagadNumber) { document.getElementById('display_nagadNumber').innerText = data.nagadNumber; }
+                if(data.bkashNumber) {
+                    const bkashEl = document.getElementById('display_bkashNumber');
+                    if(bkashEl) bkashEl.innerText = data.bkashNumber;
                 }
             }
         });
@@ -365,6 +374,7 @@
                         document.getElementById('bkashArea').classList.add('hidden');
                         document.getElementById('nagadArea').classList.add('hidden');
                         document.getElementById('submitOrderBtn').classList.add('hidden');
+                        document.getElementById('trxId').classList.add('hidden');
                         document.getElementById('btn-bkash').className = "pay-btn bg-[#111827] border-[#374151]";
                         document.getElementById('btn-nagad').className = "pay-btn bg-[#111827] border-[#374151]";
                         window.selectedMethod = '';
@@ -399,11 +409,24 @@
                     else if (order.status === 'Confirmed') { stats.confirmed.c++; stats.confirmed.a += amt; }
                     else if (order.status === 'Rejected') { stats.rejected.c++; stats.rejected.a += amt; }
 
-                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-2 py-1 rounded text-xs font-bold border border-yellow-500/20">Pending</span>`;
-                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-2 py-1 rounded text-xs font-bold border border-green-500/20">Confirmed</span>`;
-                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-2 py-1 rounded text-xs font-bold border border-red-500/20">Rejected</span>`;
+                    let sBadge = `<span class="bg-yellow-500/10 text-yellow-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold mt-1 inline-block">⏳ Pending</span>`;
+                    if(order.status === 'Confirmed') sBadge = `<span class="bg-green-500/10 text-green-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold mt-1 inline-block">✅ Confirmed</span>`;
+                    if(order.status === 'Rejected') sBadge = `<span class="bg-red-500/10 text-red-400 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold mt-1 inline-block">❌ Rejected</span>`;
 
                     const payColor = order.paymentMethod.includes('bKash') ? 'text-[#E2136E]' : 'text-[#F58220]';
+
+                    let actionBtns = '';
+                    if(isPending) {
+                        actionBtns = `
+                            <div class="flex gap-1 justify-end">
+                                <button onclick="event.stopPropagation(); handleQuickAction('Confirmed', '${id}')" class="bg-green-600/20 text-green-500 px-2.5 py-1.5 rounded-lg text-xs font-bold border border-green-500/30">✅</button>
+                                <button onclick="event.stopPropagation(); handleQuickAction('Rejected', '${id}')" class="bg-red-600/20 text-red-500 px-2.5 py-1.5 rounded-lg text-xs font-bold border border-red-500/30">❌</button>
+                            </div>
+                        `;
+                    } else {
+                        let stText = order.status === 'Confirmed' ? '<span class="text-green-500">✅ ডান</span>' : '<span class="text-red-500">❌ বাতিল</span>';
+                        actionBtns = `<div class="text-[10px] font-bold">${stText}</div>`;
+                    }
 
                     const tr = `
                         <tr class="hover:bg-[#2d3748] border-t border-slate-800/50 cursor-pointer" onclick="viewCustomerDetails('${id}')">
@@ -416,7 +439,7 @@
                                 <p class="font-mono text-[9px] sm:text-xs text-slate-300 truncate w-16 sm:w-auto mx-auto">${order.trxId}</p>
                             </td>
                             <td class="p-2 sm:px-4 sm:py-3 text-right align-middle pr-3">
-                                ${sBadge}
+                                ${actionBtns}
                             </td>
                         </tr>
                     `;
@@ -437,14 +460,16 @@
             if(action === 'Update') {
                 window.showProcessing("আপডেট হচ্ছে...");
                 setTimeout(async () => {
-                    await updateDoc(doc(db, "orders", id), {
-                        name: document.getElementById('detName').value,
-                        email: document.getElementById('detEmail').value,
-                        phone: document.getElementById('detPhone').value,
-                        amount: Number(document.getElementById('detAmount').value),
-                        trxId: document.getElementById('detTrxId').value
-                    });
-                    window.hideProcessing(() => { if(isFromModal) window.closeDetailsModal(); });
+                    try {
+                        await updateDoc(doc(db, "orders", id), {
+                            name: document.getElementById('detName').value,
+                            email: document.getElementById('detEmail').value,
+                            phone: document.getElementById('detPhone').value,
+                            amount: Number(document.getElementById('detAmount').value),
+                            trxId: document.getElementById('detTrxId').value
+                        });
+                        window.hideProcessing(() => { if(isFromModal) window.closeDetailsModal(); });
+                    } catch(e) { window.hideProcessing(() => window.showCustomAlert("ত্রুটি", "সমস্যা হয়েছে।", false)); }
                 }, 500);
                 return;
             }
@@ -479,7 +504,10 @@
         function selectPayment(method) {
             window.selectedMethod = method;
             const btn = document.getElementById('submitOrderBtn');
+            const trx = document.getElementById('trxId');
             btn.classList.remove('hidden');
+            trx.classList.remove('hidden');
+            
             document.getElementById('btn-bkash').className = "pay-btn bg-[#111827] border-[#374151]";
             document.getElementById('btn-nagad').className = "pay-btn bg-[#111827] border-[#374151]";
             document.getElementById('nagadArea').classList.add('hidden');
@@ -489,7 +517,7 @@
                 document.getElementById('btn-bkash').classList.add('border-[#E2136E]', 'bg-slate-800');
                 document.getElementById('bkashArea').classList.remove('hidden');
                 btn.className = "w-full bg-[#E2136E] text-white font-bold py-3 rounded-xl mt-2";
-                btn.innerText = "বিকাশ পেমেন্ট";
+                btn.innerText = "অর্ডার কনফার্ম করুন";
             } else {
                 document.getElementById('btn-nagad').classList.add('border-[#F58220]', 'bg-slate-800');
                 document.getElementById('nagadArea').classList.remove('hidden');
@@ -499,13 +527,34 @@
         }
         function scrollToForm() { document.getElementById('orderSection').scrollIntoView({ behavior: 'smooth' }); }
         
-        function copyNagadNumber() { 
-            const textToCopy = document.getElementById('display_nagadNumber').innerText;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                const iconSpan = document.getElementById('nagadCopyIcon');
-                iconSpan.innerText = '✅';
-                setTimeout(() => { iconSpan.innerText = '📋'; }, 2000);
-            });
+        // ================= উন্নত কপি ফাংশন (যেকোনো ব্রাউজারে কাজ করবে) =================
+        function copyNumber(textId, iconId) {
+            const textToCopy = document.getElementById(textId).innerText;
+            
+            function showSuccess() {
+                const iconSpan = document.getElementById(iconId);
+                iconSpan.innerHTML = '✅';
+                setTimeout(() => { iconSpan.innerHTML = '📋'; }, 2000);
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(showSuccess).catch(err => console.error(err));
+            } else {
+                let textArea = document.createElement("textarea");
+                textArea.value = textToCopy;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showSuccess();
+                } catch (err) {
+                    console.error('Copy failed', err);
+                }
+                document.body.removeChild(textArea);
+            }
         }
         
         window.togglePassword = function() {
